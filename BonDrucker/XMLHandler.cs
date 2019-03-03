@@ -11,7 +11,7 @@ namespace BonDrucker
 {
     static class XMLHandler
     {
-        static void save<T>(T objectToSave,string fileName)
+        public static void save<T>(T objectToSave,string fileName)
         {
             if (objectToSave == null) { return; }
 
@@ -36,18 +36,47 @@ namespace BonDrucker
 
         }
 
-        static void update(string fileName, string filePath)
+        public static void update(string fileName, string filePath)
         {
 
 
 
         }
 
-        static string read(string fileName, string filePath)
+        public static T read<T>(string fileName)
         {
+            if (string.IsNullOrEmpty(fileName)) { return default(T); }
 
+            T objectOut = default(T);
 
+            try
+            {
+                string attributeXml = string.Empty;
 
+                XmlDocument xmlDocument = new XmlDocument();
+                xmlDocument.Load(fileName);
+                string xmlString = xmlDocument.OuterXml;
+
+                using (StringReader read = new StringReader(xmlString))
+                {
+                    Type outType = typeof(T);
+
+                    XmlSerializer serializer = new XmlSerializer(outType);
+                    using (XmlReader reader = new XmlTextReader(read))
+                    {
+                        objectOut = (T)serializer.Deserialize(reader);
+                        reader.Close();
+                    }
+
+                    read.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.Log(ex);
+            }
+
+            return objectOut;
         }
     }
 }

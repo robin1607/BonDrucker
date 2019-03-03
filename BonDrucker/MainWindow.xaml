@@ -5,8 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BonDrucker"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="623.343" Width="928.458">
     <Grid>
-        
+        <Menu x:Name="menu" HorizontalAlignment="Stretch" Height="18" VerticalAlignment="Top" Width="Auto">
+            <MenuItem Header="Menü">
+                <MenuItem Header="Programm beenden" HorizontalAlignment="Left" Width="201" Margin="0,0,-61,0" Click="closeProgramm"/>
+            </MenuItem>
+            <MenuItem Header="Einstellungen">
+                <MenuItem Header="Suchtags hinzufügen"/>
+                <MenuItem Header="Überprüfe Verbindungen"/>
+                <MenuItem Header="Muster-Antwortsätze"/>
+            </MenuItem>
+        </Menu>
     </Grid>
 </Window>

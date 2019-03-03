@@ -10,29 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace BonDrucker
 {
     /// <summary>
-    /// Interaktionslogik für MainWindow.xaml
+    /// Interaktionslogik für mealEditer.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class mealEditer : Window
     {
-        public MainWindow()
+        public mealEditer()
         {
             InitializeComponent();
-        }
-
-        private void closeProgramm(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
-
-        private void edidMeals(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

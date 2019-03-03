@@ -30,9 +30,10 @@ namespace BonDrucker
             Application.Current.Shutdown();
         }
 
-        private void edidMeals(object sender, RoutedEventArgs e)
+        private void editMeals(object sender, RoutedEventArgs e)
         {
-
+            mealEditer mE = new mealEditer();
+            mE.ShowDialog();
         }
     }
 }

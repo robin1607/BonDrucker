@@ -23,5 +23,31 @@ namespace BonDrucker
         {
             InitializeComponent();
         }
+
+        private void btnSafeNewMeal_Click(object sender, RoutedEventArgs e)
+        {
+            Meal meal = getMealFromTextBox();
+            clearAllTextBoxes();
+            addMealToDataGrid(meal);
+        }
+
+        private Meal getMealFromTextBox()
+        {
+            Meal meal = new Meal();
+            meal.mainMeal = txtBoxMainMeal.Text;
+            meal.secondMeal = txtBoxSecondMeal.Text;
+            return meal;
+        }
+
+        private void clearAllTextBoxes()
+        {
+            txtBoxMainMeal.Text = "";
+            txtBoxSecondMeal.Text = "";
+        }
+
+        private void addMealToDataGrid(Meal meal)
+        {
+            mealList.Items.Add(meal);
+        }
     }
 }

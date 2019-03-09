@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<Meal xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <mainMeal>Schnitzel</mainMeal>
-  <secondMeal>Pommes</secondMeal>
-  <price>5.50</price>
-  <soldOut>false</soldOut>
-</Meal>

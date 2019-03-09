@@ -51,6 +51,7 @@ namespace BonDrucker
             Meal meal = new Meal();
             meal.mainMeal = txtBoxMainMeal.Text;
             meal.secondMeal = txtBoxSecondMeal.Text;
+            meal.price = Convert.ToDecimal(txtBoxPrice.Text);
             return meal;
         }
 
@@ -58,6 +59,7 @@ namespace BonDrucker
         {
             txtBoxMainMeal.Text = "";
             txtBoxSecondMeal.Text = "";
+            txtBoxPrice.Text = "";
         }
 
         private void addMealToDataGrid(Meal meal)

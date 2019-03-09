@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BonDrucker
 {
-    class Meal
+    public class Meal
     {
         public string mainMeal { get; set; }
         public string secondMeal { get; set; }

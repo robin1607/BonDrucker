@@ -29,7 +29,22 @@ namespace BonDrucker
             Meal meal = getMealFromTextBox();
             clearAllTextBoxes();
             addMealToDataGrid(meal);
+            XMLHandler.saveOrUpdateMealList(meal);
         }
+
+        private void btnDeleteMarkedMeal_Click(object sender, RoutedEventArgs e)
+        {
+            deleteMealFromDataGrid();
+        }
+
+        private void mealListe_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Delete)
+            {
+                deleteMealFromDataGrid();
+            }
+        }
+
 
         private Meal getMealFromTextBox()
         {
@@ -48,6 +63,14 @@ namespace BonDrucker
         private void addMealToDataGrid(Meal meal)
         {
             mealList.Items.Add(meal);
+        }
+
+        private void deleteMealFromDataGrid()
+        {
+            if (mealList.SelectedItem != null && mealList.SelectedIndex >= 0)
+            {
+                mealList.Items.RemoveAt(mealList.SelectedIndex);
+            }
         }
     }
 }

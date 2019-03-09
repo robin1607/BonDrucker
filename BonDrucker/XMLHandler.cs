@@ -11,39 +11,53 @@ namespace BonDrucker
 {
     static class XMLHandler
     {
-        public static void save<T>(T objectToSave,string fileName)
+        // TODO: Get this from settings
+        static string _filePath = @"C:\Users\Robin Klos\Documents\Visual Studio 2015\Projects\BonDrucker\BonDrucker\";
+        static string _fileName = "essensListe.xml";
+
+        public static void saveOrUpdateMealList(Meal meal)
+        {
+            if (checkIfFileExists(_filePath))
+            {
+                update(_fileName, _filePath);
+            } else
+            {
+                save<Meal>(meal, _fileName, _filePath);
+            }
+        }
+
+
+        private static void save<T>(T objectToSave,string fileName, string filePath)
         {
             if (objectToSave == null) { return; }
 
             try
             {
-                XmlDocument xmlDocument = new XmlDocument();
                 XmlSerializer serializer = new XmlSerializer(objectToSave.GetType());
-                using (MemoryStream stream = new MemoryStream())
+                // TODO: Check if fileName ends with xml, otherwise add it here!
+                using (FileStream stream = new FileStream(filePath + fileName, FileMode.Create))
                 {
                     serializer.Serialize(stream, objectToSave);
-                    stream.Position = 0;
-                    xmlDocument.Load(stream);
-                    xmlDocument.Save(fileName);
                     stream.Close();
                 }
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
                 ExceptionHandler.Log(ex);
             }
 
 
         }
 
-        public static void update(string fileName, string filePath)
+        private static void update(string fileName, string filePath)
         {
 
 
 
         }
 
-        public static T read<T>(string fileName)
+        private static T read<T>(string fileName)
         {
             if (string.IsNullOrEmpty(fileName)) { return default(T); }
 
@@ -77,6 +91,11 @@ namespace BonDrucker
             }
 
             return objectOut;
+        }
+
+        private static bool checkIfFileExists(string filePath)
+        {
+            return File.Exists(filePath);
         }
     }
 }

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BonDrucker", "BonDrucker\BonDrucker.csproj", "{2B0A32D0-DAFF-4D65-96B6-19B5EA6FB7A6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BonDrucker", "BonDrucker.csproj", "{2B0A32D0-DAFF-4D65-96B6-19B5EA6FB7A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

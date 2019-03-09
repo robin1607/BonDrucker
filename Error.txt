@@ -10,3 +10,23 @@ StackTrace :    bei System.Xml.Serialization.TypeDesc.CheckSupported()
    bei System.Xml.Serialization.XmlSerializer..ctor(Type type, String defaultNamespace)
    bei System.Xml.Serialization.XmlSerializer..ctor(Type type)
    bei BonDrucker.XMLHandler.save[T](T objectToSave, String fileName) in C:\Users\Robin Klos\Documents\Visual Studio 2015\Projects\BonDrucker\BonDrucker\XMLHandler.cs:Zeile 37.
+-----------------------------------------------------------------------------
+Date : 09.03.2019 16:11:10
+
+System.IO.DirectoryNotFoundException
+Message : Ein Teil des Pfades "C:\Users\Robin Klos\Documents\Visual Studio 2015\Projects\BonDrucker\BonDrucker\essensListe.xml" konnte nicht gefunden werden.
+StackTrace :    bei System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   bei System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   bei System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   bei System.IO.FileStream..ctor(String path, FileMode mode)
+   bei BonDrucker.XMLHandler.save[T](T objectToSave, String fileName, String filePath) in C:\Users\Robin Klos\Documents\Visual Studio 2015\Projects\BonDrucker\XMLHandler.cs:Zeile 38.
+-----------------------------------------------------------------------------
+Date : 09.03.2019 16:11:53
+
+System.IO.DirectoryNotFoundException
+Message : Ein Teil des Pfades "C:\Users\Robin Klos\Documents\Visual Studio 2015\Projects\BonDrucker\BonDrucker\essensListe.xml" konnte nicht gefunden werden.
+StackTrace :    bei System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   bei System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   bei System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   bei System.IO.FileStream..ctor(String path, FileMode mode)
+   bei BonDrucker.XMLHandler.save[T](T objectToSave, String fileName, String filePath) in C:\Users\Robin Klos\Documents\Visual Studio 2015\Projects\BonDrucker\XMLHandler.cs:Zeile 38.

@@ -9,7 +9,7 @@ namespace BonDrucker
 {
     class ExceptionHandler
     {
-        static string filePath = @"C:\Users\Robin Klos\Documents\Visual Studio 2015\Projects\BonDrucker\BonDrucker\Error.txt";
+        static string filePath = @"C:\Users\Robin Klos\Documents\Visual Studio 2015\Projects\BonDrucker\Error.txt";
 
         public static void Log(Exception ex)
         {

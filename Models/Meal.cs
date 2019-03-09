@@ -10,6 +10,7 @@ namespace BonDrucker
     {
         public string mainMeal { get; set; }
         public string secondMeal { get; set; }
+        public decimal price { get; set; }
         public bool soldOut { get; set; }
     }
 }

@@ -15,21 +15,21 @@ using System.Windows.Shapes;
 namespace BonDrucker
 {
     /// <summary>
-    /// Interaktionslogik für mealEditer.xaml
+    /// Interaktionslogik für MainMealEditer.xaml
     /// </summary>
-    public partial class mealEditer : Window
+    public partial class mainMealEditer : Window
     {
-        public mealEditer()
+        public mainMealEditer()
         {
             InitializeComponent();
         }
 
         private void btnSafeNewMeal_Click(object sender, RoutedEventArgs e)
         {
-            Meal meal = getMealFromTextBox();
+            MainMeal meal = getMealFromTextBox();
             clearAllTextBoxes();
             addMealToDataGrid(meal);
-            XMLHandler.saveOrUpdateMealList(meal);
+            CSVHandler.addMealToCSV(meal);
         }
 
         private void btnDeleteMarkedMeal_Click(object sender, RoutedEventArgs e)
@@ -46,23 +46,23 @@ namespace BonDrucker
         }
 
 
-        private Meal getMealFromTextBox()
+        private MainMeal getMealFromTextBox()
         {
-            Meal meal = new Meal();
-            meal.mainMeal = txtBoxMainMeal.Text;
-            meal.secondMeal = txtBoxSecondMeal.Text;
+            MainMeal meal = new MainMeal();
+            meal.mealName = txtBoxMainMeal.Text;
             meal.price = Convert.ToDecimal(txtBoxPrice.Text);
+            meal.insertable = checkBoxInertable.IsChecked.HasValue ? checkBoxInertable.IsChecked.Value : false;
             return meal;
         }
 
         private void clearAllTextBoxes()
         {
             txtBoxMainMeal.Text = "";
-            txtBoxSecondMeal.Text = "";
             txtBoxPrice.Text = "";
+            checkBoxInertable.IsChecked = false;
         }
 
-        private void addMealToDataGrid(Meal meal)
+        private void addMealToDataGrid(MainMeal meal)
         {
             mealList.Items.Add(meal);
         }

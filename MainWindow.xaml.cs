@@ -23,6 +23,29 @@ namespace BonDrucker
         public MainWindow()
         {
             InitializeComponent();
+            addButtonsToForm();
+        }
+
+        private void addButtonsToForm()
+        {
+            List<IMeal> mainMeals = getMainMealsFromCSV();
+            spButton.Children.Clear();
+            foreach(IMeal meal in mainMeals)
+            {
+                Button newBtn = new Button();
+
+                newBtn.Content = meal.mealName;
+                newBtn.Name = "btn_";
+
+                spButton.Children.Add(newBtn);
+            }
+
+        }
+
+        private List<IMeal> getMainMealsFromCSV()
+        {
+            return CSVHandler.read("BonDrucker.MainMeal");
+
         }
 
         private void closeProgramm(object sender, RoutedEventArgs e)
@@ -32,7 +55,7 @@ namespace BonDrucker
 
         private void editMeals(object sender, RoutedEventArgs e)
         {
-            mealEditer mE = new mealEditer();
+            mainMealEditer mE = new mainMealEditer();
             mE.ShowDialog();
         }
     }

@@ -67,6 +67,9 @@
     <Compile Include="ExceptionHandler.cs" />
     <Compile Include="Models\IMeal.cs" />
     <Compile Include="Models\mainMeal.cs" />
+    <Compile Include="secondMealChooser.xaml.cs">
+      <DependentUpon>secondMealChooser.xaml</DependentUpon>
+    </Compile>
     <Compile Include="XMLHandler.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -81,6 +84,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="mainMealEditer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="secondMealChooser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

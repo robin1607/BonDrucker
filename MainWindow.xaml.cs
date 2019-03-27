@@ -35,7 +35,8 @@ namespace BonDrucker
                 Button newBtn = new Button();
 
                 newBtn.Content = meal.mealName;
-                newBtn.Name = "btn_";
+                newBtn.Name = meal.insertable.ToString()  + "_mainMealButton";
+                newBtn.Click += new RoutedEventHandler(mainMealButton_click);
 
                 spButton.Children.Add(newBtn);
             }
@@ -57,6 +58,23 @@ namespace BonDrucker
         {
             mainMealEditer mE = new mainMealEditer();
             mE.ShowDialog();
+        }
+
+        protected void mainMealButton_click(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            if (getInsertableOfButton(button))
+            {
+                secondMealChooser smc = new secondMealChooser(getInsertableOfButton(button));
+                smc.ShowDialog();
+            }
+
+        }
+
+        private bool getInsertableOfButton(Button button)
+        {
+            char insertable = button.Name[0];
+            return insertable == 'T' ? true : false;
         }
     }
 }

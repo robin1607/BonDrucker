@@ -45,7 +45,7 @@ namespace BonDrucker
 
         private List<IMeal> getMainMealsFromCSV()
         {
-            return CSVHandler.read("BonDrucker.MainMeal");
+            return CSVHandler.readMeals("BonDrucker.MainMeal");
 
         }
 

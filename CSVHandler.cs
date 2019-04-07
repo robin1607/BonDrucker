@@ -1,4 +1,5 @@
-﻿using CsvHelper;
+﻿using BonDrucker.Models;
+using CsvHelper;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,12 +13,21 @@ namespace BonDrucker
         static string _filePath = @"C:\Users\Robin Klos\Documents\Visual Studio 2015\Projects\BonDrucker\";
         static string _fileName = "";
 
-        public static void addMealToCSV(IMeal meal)
+        public static void addToCSV(IMeal meal)
         {
             string type = meal.GetType().ToString();
             writeFileNameToProperty(type);
-            var mealList = read(type);
+            var mealList = readMeals(type);
             mealList.Add(meal);
+            write(mealList);
+        }
+
+        public static void addToCSV(MealCombination mealCombo)
+        {
+            string type = mealCombo.GetType().ToString();
+            writeFileNameToProperty(type);
+            var mealList = readCombos(type);
+            mealList.Add(mealCombo);
             write(mealList);
         }
 
@@ -32,6 +42,12 @@ namespace BonDrucker
             if (type.Contains("SecondMeal"))
             {
                 _fileName = SecondMeal.csvFileName;
+                return;
+            }
+
+            if (type.Contains("MealCombination"))
+            {
+                _fileName = MealCombination.csvFileName;
                 return;
             }
         }
@@ -53,7 +69,25 @@ namespace BonDrucker
             }
         }
 
-        public static List<IMeal> read(string type)
+        private static void write(List<MealCombination> mealCombo)
+        {
+            try
+            {
+                writeFileNameToProperty(mealCombo.First().GetType().ToString());
+                using (var writer = new StreamWriter(_filePath + _fileName))
+                using (var csv = new CsvWriter(writer))
+                {
+                    csv.WriteRecords(mealCombo);
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.Log(ex);
+            }
+        }
+
+
+        public static List<IMeal> readMeals(string type)
         {
             try
             {
@@ -71,7 +105,10 @@ namespace BonDrucker
                         record.mealName = csv.GetField<string>("mealName");
                         record.price = csv.GetField<decimal>("price");
                         record.soldOut = csv.GetField<bool>("soldOut");
-                        record.insertable = csv.GetField<bool>("insertable");
+                        if (type == "MainMeal")
+                        {
+                            record.insertable = csv.GetField<bool>("insertable");
+                        }
                         records.Add(record);
                     }
                     return records;
@@ -81,6 +118,36 @@ namespace BonDrucker
             {
                 ExceptionHandler.Log(ex);
                 return new List<IMeal>();
+            }
+        }
+
+        public static List<MealCombination> readCombos(string type)
+        {
+            try
+            {
+                writeFileNameToProperty(type);
+                using (var reader = new StreamReader(_filePath + _fileName))
+                using (var csv = new CsvReader(reader))
+                {
+                    var records = new List<MealCombination>();
+                    csv.Read();
+                    csv.ReadHeader();
+                    while (csv.Read())
+                    {
+                        var record = (MealCombination)Activator.CreateInstance(Type.GetType(type));
+                        record.guid = csv.GetField<Guid>("guid");
+                        record.mainMealName = csv.GetField<string>("mainMealName");
+                        record.secondMealName = csv.GetField<string>("secondMealName");
+                        record.totalPrice = csv.GetField<decimal>("totalPrice");
+                        records.Add(record);
+                    }
+                    return records;
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.Log(ex);
+                return new List<MealCombination>();
             }
         }
     }

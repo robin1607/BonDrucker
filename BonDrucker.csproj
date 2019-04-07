@@ -65,8 +65,12 @@
     </ApplicationDefinition>
     <Compile Include="CSVHandler.cs" />
     <Compile Include="ExceptionHandler.cs" />
+    <Compile Include="mealCombinationEditer.xaml.cs">
+      <DependentUpon>mealCombinationEditer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\IMeal.cs" />
     <Compile Include="Models\mainMeal.cs" />
+    <Compile Include="Models\mealCombination.cs" />
     <Compile Include="secondMealChooser.xaml.cs">
       <DependentUpon>secondMealChooser.xaml</DependentUpon>
     </Compile>
@@ -84,6 +88,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="mainMealEditer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="mealCombinationEditer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

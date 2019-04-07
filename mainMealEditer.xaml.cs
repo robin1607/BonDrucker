@@ -24,55 +24,104 @@ namespace BonDrucker
             InitializeComponent();
         }
 
-        private void btnSafeNewMeal_Click(object sender, RoutedEventArgs e)
+        private void btnSafeNewMainMeal_Click(object sender, RoutedEventArgs e)
         {
-            MainMeal meal = getMealFromTextBox();
-            clearAllTextBoxes();
-            addMealToDataGrid(meal);
-            CSVHandler.addMealToCSV(meal);
+            MainMeal meal = getMainMealFromTextBox();
+            clearAllMainMealTextBoxes();
+            addMainMealToDataGrid(meal);
+            CSVHandler.addToCSV(meal);
         }
 
-        private void btnDeleteMarkedMeal_Click(object sender, RoutedEventArgs e)
+        private void btnDeleteMarkedMainMeal_Click(object sender, RoutedEventArgs e)
         {
-            deleteMealFromDataGrid();
+            deleteMealFromDataGrid(mainMealList);
         }
 
         private void mealListe_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Delete)
             {
-                deleteMealFromDataGrid();
+                deleteMealFromDataGrid(mainMealList);
             }
         }
 
 
-        private MainMeal getMealFromTextBox()
+        private MainMeal getMainMealFromTextBox()
         {
             MainMeal meal = new MainMeal();
             meal.mealName = txtBoxMainMeal.Text;
-            meal.price = Convert.ToDecimal(txtBoxPrice.Text);
+            meal.price = Convert.ToDecimal(txtBoxMainMealSinglePrice.Text);
             meal.insertable = checkBoxInertable.IsChecked.HasValue ? checkBoxInertable.IsChecked.Value : false;
             return meal;
         }
 
-        private void clearAllTextBoxes()
+        private void clearAllMainMealTextBoxes()
         {
             txtBoxMainMeal.Text = "";
-            txtBoxPrice.Text = "";
+            txtBoxMainMealSinglePrice.Text = "";
             checkBoxInertable.IsChecked = false;
         }
 
-        private void addMealToDataGrid(MainMeal meal)
+        private void addMainMealToDataGrid(IMeal meal)
         {
-            mealList.Items.Add(meal);
+            mainMealList.Items.Add(meal);
         }
 
-        private void deleteMealFromDataGrid()
+        private void deleteMealFromDataGrid(DataGrid mealList)
         {
             if (mealList.SelectedItem != null && mealList.SelectedIndex >= 0)
             {
                 mealList.Items.RemoveAt(mealList.SelectedIndex);
             }
+        }
+
+        private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            DataGridRow row = sender as DataGridRow;
+            MainMeal meal = row.Item as MainMeal;
+
+            if (meal.insertable)
+            {
+                mealCombinationEditer mCE = new mealCombinationEditer(meal);
+                mCE.ShowDialog();
+            }
+        }
+
+        // ##############################################################
+        //                      Second Meal:
+        // ##############################################################
+
+        private void btnSafeNewSecondMeal_Click(object sender, RoutedEventArgs e)
+        {
+            SecondMeal meal = getSecondMealFromTextBox();
+            clearAllSecondMealTextBoxes();
+            addSecondMealToDataGrid(meal);
+            CSVHandler.addToCSV(meal);
+        }
+
+        private void btnDeleteMarkedSecondMeal_Click(object sender, RoutedEventArgs e)
+        {
+            deleteMealFromDataGrid(secondMealList);
+
+        }
+
+        private void addSecondMealToDataGrid(IMeal meal)
+        {
+            secondMealList.Items.Add(meal);
+        }
+
+        private SecondMeal getSecondMealFromTextBox()
+        {
+            SecondMeal meal = new SecondMeal();
+            meal.mealName = txtBoxSecondMeal.Text;
+            meal.price = Convert.ToDecimal(txtBoxSecondMealSinglePrice.Text);
+            return meal;
+        }
+   
+        private void clearAllSecondMealTextBoxes()
+        {
+            txtBoxSecondMeal.Text = "";
+            txtBoxSecondMealSinglePrice.Text = "";
         }
     }
 }

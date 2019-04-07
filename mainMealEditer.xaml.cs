@@ -156,7 +156,7 @@ namespace BonDrucker
 
         private void addSecondMealsToDataGrid(List<IMeal> meal)
         {
-            secondMealList.Items.Add(meal);
+            secondMealList.ItemsSource = meal;
         }
 
         private SecondMeal getSecondMealFromTextBox()

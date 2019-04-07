@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BonDrucker.Models
 {
-    class MealCombination
+    public class MealCombination
     {
         public MealCombination()
         {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BonDrucker.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,46 +20,47 @@ namespace BonDrucker
     /// </summary>
     public partial class secondMealChooser : Window
     {
-        static bool Insertable;
+        MainMeal _mainMeal;
+        public MealCombination _mealCombo { get; set; }
 
         public secondMealChooser()
         {
             InitializeComponent();
         }
 
-        public secondMealChooser(bool name)
+        public secondMealChooser(MainMeal mainMeal)
         {
             InitializeComponent();
-            Insertable = name;
+            _mainMeal = mainMeal;
+            addButtonsToForm();
         }
 
         private void addButtonsToForm()
         {
-            List<IMeal> secondMeals = getSecondMealsFromCSV();
-            spButton.Children.Clear();
-            foreach (IMeal meal in secondMeals)
+            List<MealCombination> mealCombos = CSVHandler.getMealCombinationsFromCSV(_mainMeal);
+            
+            grid.Children.Clear();
+            int index = 0;
+            foreach (MealCombination combo in mealCombos)
             {
                 Button newBtn = new Button();
-
-                newBtn.Content = meal.mealName;
+                grid.ColumnDefinitions.Add(new ColumnDefinition());
+                newBtn.Content = combo.secondMealName;
                 newBtn.Name = "secondMealButton";
+                newBtn.Tag = combo;
                 newBtn.Click += new RoutedEventHandler(secondMealButton_click);
 
-                spButton.Children.Add(newBtn);
+                Grid.SetColumn(newBtn, index);
+                index++;
+                grid.Children.Add(newBtn);
             }
-
         }
 
         protected void secondMealButton_click(object sender, EventArgs e)
         {
-
-
+            Button button = sender as Button;
+            _mealCombo = button.Tag as MealCombination;
             this.Close();
-        }
-
-        private List<IMeal> getSecondMealsFromCSV()
-        {
-            return CSVHandler.readMeals("BonDrucker.SecondMeal");
         }
     }
 }

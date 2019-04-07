@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BonDrucker.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,10 +21,14 @@ namespace BonDrucker
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<MealCombination> _mealCombos = new List<MealCombination>();
+        public decimal _totalPrice {get; set;}
         public MainWindow()
         {
             InitializeComponent();
             addButtonsToForm();
+            dataGrid.ItemsSource = _mealCombos;
+            txtBoxTotalPrice.DataContext = this;
         }
 
         private void addButtonsToForm()
@@ -35,6 +40,7 @@ namespace BonDrucker
                 Button newBtn = new Button();
 
                 newBtn.Content = meal.mealName;
+                newBtn.Tag = meal;
                 newBtn.Name = meal.insertable.ToString()  + "_mainMealButton";
                 newBtn.Click += new RoutedEventHandler(mainMealButton_click);
 
@@ -62,18 +68,24 @@ namespace BonDrucker
         protected void mainMealButton_click(object sender, EventArgs e)
         {
             Button button = sender as Button;
-            if (getInsertableOfButton(button))
+            var mainMeal = button.Tag as MainMeal;
+            if (mainMeal.insertable)
             {
-                secondMealChooser smc = new secondMealChooser(getInsertableOfButton(button));
-                smc.ShowDialog();
+                secondMealChooser smc = new secondMealChooser(mainMeal);
+                if(smc.ShowDialog() == false)
+                {
+                    MealCombination combo = smc._mealCombo;
+                    _totalPrice += combo.totalPrice;
+                    txtBoxTotalPrice.DataContext = this;
+                    addMealCombosToDataGrid(combo);
+                }
             }
-
         }
 
-        private bool getInsertableOfButton(Button button)
+        private void addMealCombosToDataGrid(MealCombination combo)
         {
-            char insertable = button.Name[0];
-            return insertable == 'T' ? true : false;
+            _mealCombos.Add(combo);
+            dataGrid.Items.Refresh();
         }
     }
 }

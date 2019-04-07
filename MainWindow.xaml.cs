@@ -75,9 +75,12 @@ namespace BonDrucker
                 if(smc.ShowDialog() == false)
                 {
                     MealCombination combo = smc._mealCombo;
-                    _totalPrice += combo.totalPrice;
-                    txtBoxTotalPrice.DataContext = this;
-                    addMealCombosToDataGrid(combo);
+                    if (combo != null)
+                    {
+                        updateTotalPriceTxtBox(combo.totalPrice);
+                        addMealCombosToDataGrid(combo);
+                    }
+
                 }
             }
         }
@@ -86,6 +89,13 @@ namespace BonDrucker
         {
             _mealCombos.Add(combo);
             dataGrid.Items.Refresh();
+        }
+
+        // Keine Optimale Loesung .. aber funktioniert vorerst
+        private void updateTotalPriceTxtBox(decimal price)
+        {
+            _totalPrice += price;
+            txtBoxTotalPrice.Text = _totalPrice + " €";
         }
     }
 }

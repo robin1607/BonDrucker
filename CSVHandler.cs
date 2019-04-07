@@ -46,7 +46,8 @@ namespace BonDrucker
 
         public static List<MealCombination> getMealCombinationsFromCSV(MainMeal mainMeal)
         {
-            return readCombos("BonDrucker.MealCombination");
+            List<MealCombination> combos = readCombos("BonDrucker.MealCombination");
+            return combos.FindAll(x => x.mainMealGUID == mainMeal.guid);
         }
 
         public static void updateCSV(IMeal meal)

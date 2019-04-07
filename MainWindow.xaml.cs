@@ -34,17 +34,37 @@ namespace BonDrucker
         private void addButtonsToForm()
         {
             List<IMeal> mainMeals = getMainMealsFromCSV();
-            spButton.Children.Clear();
-            foreach(IMeal meal in mainMeals)
+            btnGrid.Children.Clear();
+            int index = 0;
+            foreach (IMeal meal in mainMeals)
             {
                 Button newBtn = new Button();
+                if (index % 4 == 0)
+                {
+                    btnGrid.RowDefinitions.Add(new RowDefinition());
+                }
+                else
+                {
+                    btnGrid.ColumnDefinitions.Add(new ColumnDefinition());
+                }
 
                 newBtn.Content = meal.mealName;
                 newBtn.Tag = meal;
                 newBtn.Name = meal.insertable.ToString()  + "_mainMealButton";
                 newBtn.Click += new RoutedEventHandler(mainMealButton_click);
+                if (index % 4 == 0)
+                {
+                    Grid.SetRow(newBtn, index);
 
-                spButton.Children.Add(newBtn);
+                }
+                else
+                {
+                    Grid.SetColumn(newBtn, index);
+
+                }
+
+                index++;
+                btnGrid.Children.Add(newBtn);
             }
 
         }

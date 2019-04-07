@@ -11,7 +11,7 @@ namespace BonDrucker
     public partial class mealCombinationEditer : Window
     {
         private MainMeal meal;
-        private MealCombination mealCombo;
+        private List<MealCombination> mealCombos = new List<MealCombination>();
 
         public mealCombinationEditer()
         {
@@ -27,23 +27,8 @@ namespace BonDrucker
 
         private void addMealCombinationsToDataGrid(MainMeal mainMeal)
         {
-            List<IMeal> secondMeals = getSecondMealsFromCSV();
-            List<MealCombination> mealCombos = new List<MealCombination>();
-            foreach (SecondMeal secondMeal in secondMeals)
-            {
-                mealCombo = getMealCombination(mainMeal, secondMeal);
-                mealCombos.Add(mealCombo);
-            }
+            mealCombos = CSVHandler.getMealCombinationsFromCSV(mainMeal);
             dataGrid.ItemsSource = mealCombos;
-        }
-
-        private MealCombination getMealCombination(MainMeal mainMeal, SecondMeal secondMeal)
-        {
-            MealCombination mealCombo = new MealCombination();
-            mealCombo.mainMealName = mainMeal.mealName;
-            mealCombo.secondMealName = secondMeal.mealName;
-            mealCombo.totalPrice = mainMeal.price + secondMeal.price;
-            return mealCombo;
         }
 
         static private List<IMeal> getSecondMealsFromCSV()  
@@ -53,7 +38,16 @@ namespace BonDrucker
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine(mealCombo);
+            foreach (MealCombination combo in mealCombos)
+            {
+                CSVHandler.updateCSV(combo);
+            }
+            this.Close();
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

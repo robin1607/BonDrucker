@@ -31,6 +31,24 @@ namespace BonDrucker
             write(mealList);
         }
 
+        public static void addToCSV(List<MealCombination> mealCombo)
+        {
+            string type = mealCombo.GetType().ToString();
+            writeFileNameToProperty(type);
+            var mealList = readCombos(type);
+            foreach (MealCombination combo in mealCombo)
+            {
+                mealList.Add(combo);
+            }
+
+            write(mealList);
+        }
+
+        public static List<MealCombination> getMealCombinationsFromCSV(MainMeal mainMeal)
+        {
+            return readCombos("BonDrucker.MealCombination");
+        }
+
         public static void updateCSV(IMeal meal)
         {
             string type = meal.GetType().ToString();
@@ -39,6 +57,26 @@ namespace BonDrucker
             // Suche Index des zu aktualisierenden Element ueber die GUID
             int index = mealList.FindIndex(x => x.guid == meal.guid);
             mealList[index] = meal;
+            write(mealList);
+        }
+
+        public static void updateCSV(MealCombination combo)
+        {
+            List<MealCombination> mealCombos = readCombos("BonDrucker.MealCombination");
+            // Suche Index des zu aktualisierenden Element ueber die GUID
+            int index = mealCombos.FindIndex(x => x.guid == combo.guid);
+            mealCombos[index] = combo;
+            write(mealCombos);
+        }
+
+        public static void deleteRow(IMeal meal)
+        {
+            string type = meal.GetType().ToString();
+            writeFileNameToProperty(type);
+            var mealList = readMeals(type);
+            // Suche Index des zu aktualisierenden Element ueber die GUID
+            int index = mealList.FindIndex(x => x.guid == meal.guid);
+            mealList.RemoveAt(index);
             mealList.Add(meal);
             write(mealList);
         }
@@ -147,8 +185,10 @@ namespace BonDrucker
                     csv.ReadHeader();
                     while (csv.Read())
                     {
-                        var record = (MealCombination)Activator.CreateInstance(Type.GetType(type));
+                        var record = new MealCombination();
                         record.guid = csv.GetField<Guid>("guid");
+                        record.mainMealGUID = csv.GetField<Guid>("mainMealGUID");
+                        record.secondMealGUID = csv.GetField<Guid>("secondMealGUID");
                         record.mainMealName = csv.GetField<string>("mainMealName");
                         record.secondMealName = csv.GetField<string>("secondMealName");
                         record.totalPrice = csv.GetField<decimal>("totalPrice");

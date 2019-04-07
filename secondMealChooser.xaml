@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="secondMealChooser" Height="337.176" Width="531.7">
     <Grid>
+        <StackPanel Name="spButton" HorizontalAlignment="Left" Height="306" VerticalAlignment="Top" Width="524"/>
 
     </Grid>
 </Window>

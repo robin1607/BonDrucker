@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BonDrucker.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,6 +38,20 @@ namespace BonDrucker
             clearAllMainMealTextBoxes();
             addMainMealToDataGrid(meal);
             CSVHandler.addToCSV(meal);
+            generateMealCombos(meal);
+        }
+
+        private void generateMealCombos(MainMeal mainMeal)
+        {
+            List<IMeal> secondMeals = getSecondMealsFromCSV();
+            List<MealCombination> mealCombos = new List<MealCombination>();
+            MealCombination mealCombo;
+            foreach (SecondMeal secondMeal in secondMeals)
+            {
+                mealCombo = MealCombination.getMealCombination(mainMeal, secondMeal);
+                mealCombos.Add(mealCombo);
+            }
+            CSVHandler.addToCSV(mealCombos);
         }
 
         private void btnDeleteMarkedMainMeal_Click(object sender, RoutedEventArgs e)
@@ -89,7 +104,7 @@ namespace BonDrucker
         {
             if (mealList.SelectedItem != null && mealList.SelectedIndex >= 0)
             {
-                mealList.Items.RemoveAt(mealList.SelectedIndex);
+                mealList.Items.RemoveAt(mealList.SelectedIndex); 
             }
         }
 
@@ -103,6 +118,11 @@ namespace BonDrucker
                 mealCombinationEditer mCE = new mealCombinationEditer(meal);
                 mCE.ShowDialog();
             }
+        }
+
+        void insertableChanged(object sender, RoutedEventArgs e)
+        {
+            
         }
 
         // ##############################################################

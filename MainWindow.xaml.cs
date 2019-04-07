@@ -46,7 +46,6 @@ namespace BonDrucker
         private List<IMeal> getMainMealsFromCSV()
         {
             return CSVHandler.readMeals("BonDrucker.MainMeal");
-
         }
 
         private void closeProgramm(object sender, RoutedEventArgs e)

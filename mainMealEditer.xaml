@@ -18,7 +18,14 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Hauptessen" Binding="{Binding Path=mealName}" IsReadOnly="True" Width="8*"/>
                             <DataGridTextColumn Header="Einzelpreis" Binding="{Binding Path=price}" IsReadOnly="True" Width="2*"/>
-                            <DataGridCheckBoxColumn Header="Beilagenfähig" Binding="{Binding Path=insertable, Mode=TwoWay}" IsReadOnly="False" Width="2*"/>
+                            <DataGridCheckBoxColumn Header="Beilagenfähig" Binding="{Binding Path=insertable, Mode=TwoWay}" IsReadOnly="False" Width="2*">
+                                <DataGridCheckBoxColumn.CellStyle>
+                                    <Style>
+                                        <EventSetter Event="CheckBox.Checked" Handler="insertableChanged"/>
+                                        <EventSetter Event="CheckBox.Unchecked" Handler="insertableChanged"/>
+                                    </Style>
+                                </DataGridCheckBoxColumn.CellStyle>
+                            </DataGridCheckBoxColumn>
                             <DataGridCheckBoxColumn  Header="Ausverkauft" Binding="{Binding Path=soldOut, Mode=TwoWay}" IsReadOnly="False" Width="2*"/>
                         </DataGrid.Columns>
                         <DataGrid.ItemContainerStyle>

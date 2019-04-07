@@ -19,9 +19,16 @@ namespace BonDrucker
     /// </summary>
     public partial class mainMealEditer : Window
     {
+        private List<IMeal> mainMeals;
+        private List<IMeal> secondMeals;
         public mainMealEditer()
         {
             InitializeComponent();
+            mainMeals = getMainMealsFromCSV();
+            mainMeals.ForEach(i => Console.Write("{0}\t", i.insertable));
+            secondMeals = getSecondMealsFromCSV();
+            addMainMealsToDataGrid(mainMeals);
+            addSecondMealsToDataGrid(secondMeals);
         }
 
         private void btnSafeNewMainMeal_Click(object sender, RoutedEventArgs e)
@@ -55,6 +62,11 @@ namespace BonDrucker
             return meal;
         }
 
+        private List<IMeal> getMainMealsFromCSV()
+        {
+            return CSVHandler.readMeals("BonDrucker.MainMeal");
+        }
+
         private void clearAllMainMealTextBoxes()
         {
             txtBoxMainMeal.Text = "";
@@ -64,7 +76,13 @@ namespace BonDrucker
 
         private void addMainMealToDataGrid(IMeal meal)
         {
-            mainMealList.Items.Add(meal);
+            mainMeals.Add(meal);
+            mainMealList.Items.Refresh();
+        }
+
+        private void addMainMealsToDataGrid(List<IMeal> meals)
+        {
+            mainMealList.ItemsSource = meals;
         }
 
         private void deleteMealFromDataGrid(DataGrid mealList)
@@ -105,7 +123,18 @@ namespace BonDrucker
 
         }
 
+        private List<IMeal> getSecondMealsFromCSV()
+        {
+            return CSVHandler.readMeals("BonDrucker.SecondMeal");
+        }
+
         private void addSecondMealToDataGrid(IMeal meal)
+        {
+            secondMeals.Add(meal);
+            secondMealList.Items.Refresh();
+        }
+
+        private void addSecondMealsToDataGrid(List<IMeal> meal)
         {
             secondMealList.Items.Add(meal);
         }

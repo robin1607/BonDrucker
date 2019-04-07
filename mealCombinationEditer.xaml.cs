@@ -1,4 +1,5 @@
 ﻿using BonDrucker.Models;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 
@@ -10,6 +11,7 @@ namespace BonDrucker
     public partial class mealCombinationEditer : Window
     {
         private MainMeal meal;
+        private MealCombination mealCombo;
 
         public mealCombinationEditer()
         {
@@ -29,7 +31,7 @@ namespace BonDrucker
             List<MealCombination> mealCombos = new List<MealCombination>();
             foreach (SecondMeal secondMeal in secondMeals)
             {
-                MealCombination mealCombo = getMealCombination(mainMeal, secondMeal);
+                mealCombo = getMealCombination(mainMeal, secondMeal);
                 mealCombos.Add(mealCombo);
             }
             dataGrid.ItemsSource = mealCombos;
@@ -47,6 +49,11 @@ namespace BonDrucker
         static private List<IMeal> getSecondMealsFromCSV()  
         {
             return CSVHandler.readMeals("BonDrucker.SecondMeal");
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine(mealCombo);
         }
     }
 }

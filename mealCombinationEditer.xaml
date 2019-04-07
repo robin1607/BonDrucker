@@ -15,7 +15,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="btnCancel" Content="Abbrechen" HorizontalAlignment="Left" Margin="10,301,0,0" VerticalAlignment="Top" Width="100"/>
-        <Button x:Name="btnSave" Content="Speichern" HorizontalAlignment="Left" Margin="486,303,0,0" VerticalAlignment="Top" Width="100"/>
+        <Button x:Name="btnSave" Content="Speichern" HorizontalAlignment="Left" Margin="486,303,0,0" VerticalAlignment="Top" Width="100" Click="btnSave_Click"/>
 
     </Grid>
 </Window>

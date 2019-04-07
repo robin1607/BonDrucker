@@ -10,7 +10,7 @@ namespace BonDrucker.Models
     {
         public MealCombination()
         {
-            guid = new Guid();
+            guid = Guid.NewGuid();
         }
         public Guid guid { get; set; }
         public string mainMealName { get; set; }

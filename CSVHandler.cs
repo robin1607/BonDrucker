@@ -31,6 +31,18 @@ namespace BonDrucker
             write(mealList);
         }
 
+        public static void updateCSV(IMeal meal)
+        {
+            string type = meal.GetType().ToString();
+            writeFileNameToProperty(type);
+            var mealList = readMeals(type);
+            // Suche Index des zu aktualisierenden Element ueber die GUID
+            int index = mealList.FindIndex(x => x.guid == meal.guid);
+            mealList[index] = meal;
+            mealList.Add(meal);
+            write(mealList);
+        }
+
         private static void writeFileNameToProperty(string type)
         {
             if (type.Contains("MainMeal"))
@@ -60,6 +72,7 @@ namespace BonDrucker
                 using (var writer = new StreamWriter(_filePath + _fileName))
                 using (var csv = new CsvWriter(writer))
                 {
+                    meal.ForEach(i => Console.Write("{0}\t", i.insertable));
                     csv.WriteRecords(meal);
                 }
             }
@@ -105,7 +118,7 @@ namespace BonDrucker
                         record.mealName = csv.GetField<string>("mealName");
                         record.price = csv.GetField<decimal>("price");
                         record.soldOut = csv.GetField<bool>("soldOut");
-                        if (type == "MainMeal")
+                        if (type.Contains("MainMeal"))
                         {
                             record.insertable = csv.GetField<bool>("insertable");
                         }

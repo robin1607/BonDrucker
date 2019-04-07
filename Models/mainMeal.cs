@@ -6,7 +6,7 @@ namespace BonDrucker
     {
         public MainMeal()
         {
-            guid = new Guid();
+            guid = Guid.NewGuid();
         }
         public Guid guid { get; set; }
         public string mealName { get; set; }

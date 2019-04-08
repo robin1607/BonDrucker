@@ -117,5 +117,11 @@ namespace BonDrucker
             _totalPrice += price;
             txtBoxTotalPrice.Text = _totalPrice + " €";
         }
+
+        private void bntDelete_Click(object sender, RoutedEventArgs e)
+        {
+            _mealCombos = new List<MealCombination>();
+            dataGrid.Items.Refresh();
+        }
     }
 }

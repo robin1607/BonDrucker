@@ -78,7 +78,6 @@ namespace BonDrucker
             // Suche Index des zu aktualisierenden Element ueber die GUID
             int index = mealList.FindIndex(x => x.guid == meal.guid);
             mealList.RemoveAt(index);
-            mealList.Add(meal);
             write(mealList);
         }
 

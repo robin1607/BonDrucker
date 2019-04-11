@@ -35,10 +35,13 @@ namespace BonDrucker
         private void btnSafeNewMainMeal_Click(object sender, RoutedEventArgs e)
         {
             MainMeal meal = getMainMealFromTextBox();
-            clearAllMainMealTextBoxes();
-            addMainMealToDataGrid(meal);
-            CSVHandler.addToCSV(meal);
-            generateMealCombos(meal);
+            if (meal != null)
+            {
+                clearAllMainMealTextBoxes();
+                addMainMealToDataGrid(meal);
+                CSVHandler.addToCSV(meal);
+                generateMealCombos(meal);
+            } 
         }
 
         private void generateMealCombos(MainMeal mainMeal)
@@ -56,25 +59,34 @@ namespace BonDrucker
 
         private void btnDeleteMarkedMainMeal_Click(object sender, RoutedEventArgs e)
         {
-            deleteMealFromDataGrid(mainMealList);
+            deleteMainMeal(mainMealList);
         }
 
         private void mealListe_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Delete)
             {
-                deleteMealFromDataGrid(mainMealList);
+                deleteMainMeal(mainMealList);
             }
         }
 
 
         private MainMeal getMainMealFromTextBox()
         {
-            MainMeal meal = new MainMeal();
-            meal.mealName = txtBoxMainMeal.Text;
-            meal.price = Convert.ToDecimal(txtBoxMainMealSinglePrice.Text);
-            meal.insertable = checkBoxInertable.IsChecked.HasValue ? checkBoxInertable.IsChecked.Value : false;
-            return meal;
+            try
+            {
+                MainMeal meal = new MainMeal();
+                meal.mealName = txtBoxMainMeal.Text;
+                meal.price = Convert.ToDecimal(txtBoxMainMealSinglePrice.Text);
+                meal.insertable = checkBoxInertable.IsChecked.HasValue ? checkBoxInertable.IsChecked.Value : false;
+                return meal;
+            }
+            catch (Exception ex)
+            {
+
+                ExceptionHandler.Log(ex);
+                return null;
+            }
         }
 
         private List<IMeal> getMainMealsFromCSV()
@@ -100,11 +112,14 @@ namespace BonDrucker
             mainMealList.ItemsSource = meals;
         }
 
-        private void deleteMealFromDataGrid(DataGrid mealList)
+        private void deleteMainMeal(DataGrid mealList)
         {
             if (mealList.SelectedItem != null && mealList.SelectedIndex >= 0)
             {
-                mealList.Items.RemoveAt(mealList.SelectedIndex); 
+                MainMeal meal = mealList.SelectedItem as MainMeal;
+                mainMeals.RemoveAt(mainMeals.FindIndex(x => x.guid == meal.guid));
+                CSVHandler.deleteRow(meal);
+                mainMealList.Items.Refresh();
             }
         }
 
@@ -132,15 +147,29 @@ namespace BonDrucker
         private void btnSafeNewSecondMeal_Click(object sender, RoutedEventArgs e)
         {
             SecondMeal meal = getSecondMealFromTextBox();
-            clearAllSecondMealTextBoxes();
-            addSecondMealToDataGrid(meal);
-            CSVHandler.addToCSV(meal);
+            if (meal != null)
+            {
+                clearAllSecondMealTextBoxes();
+                addSecondMealToDataGrid(meal);
+                CSVHandler.addToCSV(meal);
+            }
         }
 
         private void btnDeleteMarkedSecondMeal_Click(object sender, RoutedEventArgs e)
         {
-            deleteMealFromDataGrid(secondMealList);
+            deleteSecondMeal(secondMealList);
 
+        }
+
+        private void deleteSecondMeal(DataGrid mealList)
+        {
+            if (mealList.SelectedItem != null && mealList.SelectedIndex >= 0)
+            {
+                SecondMeal meal = mealList.SelectedItem as SecondMeal;
+                secondMeals.RemoveAt(secondMeals.FindIndex(x => x.guid == meal.guid));
+                CSVHandler.deleteRow(meal);
+                secondMealList.Items.Refresh();
+            }
         }
 
         private List<IMeal> getSecondMealsFromCSV()
@@ -161,10 +190,20 @@ namespace BonDrucker
 
         private SecondMeal getSecondMealFromTextBox()
         {
-            SecondMeal meal = new SecondMeal();
-            meal.mealName = txtBoxSecondMeal.Text;
-            meal.price = Convert.ToDecimal(txtBoxSecondMealSinglePrice.Text);
-            return meal;
+            try
+            {
+                SecondMeal meal = new SecondMeal();
+                meal.mealName = txtBoxSecondMeal.Text;
+                meal.price = Convert.ToDecimal(txtBoxSecondMealSinglePrice.Text);
+                return meal;
+            }
+            catch (Exception ex)
+            {
+
+                ExceptionHandler.Log(ex);
+                return null;
+            }
+
         }
    
         private void clearAllSecondMealTextBoxes()

@@ -50,6 +50,8 @@ namespace BonDrucker
 
                 newBtn.Content = meal.mealName;
                 newBtn.Tag = meal;
+                newBtn.FontSize = 18;
+                newBtn.MinHeight = 120;
                 newBtn.Name = meal.insertable.ToString()  + "_mainMealButton";
                 newBtn.Click += new RoutedEventHandler(mainMealButton_click);
                 if (index % 4 == 0)
@@ -118,10 +120,17 @@ namespace BonDrucker
             txtBoxTotalPrice.Text = _totalPrice + " €";
         }
 
+        private void resetTotalPriceTxtBox()
+        {
+            _totalPrice = 0;
+            txtBoxTotalPrice.Text = _totalPrice + " €";
+        }
+
         private void bntDelete_Click(object sender, RoutedEventArgs e)
         {
             _mealCombos = new List<MealCombination>();
-            dataGrid.Items.Refresh();
+            resetTotalPriceTxtBox();
+            dataGrid.ItemsSource = _mealCombos;
         }
     }
 }

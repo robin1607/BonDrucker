@@ -40,8 +40,8 @@ namespace BonDrucker
             {
                 mealList.Add(combo);
             }
-
-            write(mealList);
+            // Write the new List sorted by mainMeals
+            write(mealList.OrderBy(x => x.mainMealGUID).ToList());
         }
 
         public static List<MealCombination> getMealCombinationsFromCSV(MainMeal mainMeal)
@@ -80,6 +80,24 @@ namespace BonDrucker
             mealList.RemoveAt(index);
             write(mealList);
         }
+
+        public static void deleteComboRows(IMeal meal)
+        {
+            string type = "BonDrucker.MealCombination";
+            writeFileNameToProperty(type);
+            var mealList = readCombos(type);
+            // Suche Index des zu aktualisierenden Element ueber die GUID
+            if (meal.GetType().ToString().Contains("MainMeal"))
+            {
+                mealList.RemoveAll(x => x.mainMealGUID == meal.guid);
+            }
+            else
+            {
+                mealList.RemoveAll(x => x.secondMealGUID == meal.guid);
+            }
+            write(mealList);
+        }
+
 
         private static void writeFileNameToProperty(string type)
         {

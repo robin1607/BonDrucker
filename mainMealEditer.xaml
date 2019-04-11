@@ -139,7 +139,7 @@
                             <DataGridCheckBoxColumn  Header="Ausverkauft" Width="2*"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button x:Name="btnDeleteMarkedSecondMeal" Content="Auswahl löschen" HorizontalAlignment="Right" Margin="0,0,20,10" VerticalAlignment="Bottom" Width="178" RenderTransformOrigin="0.32,-0.1" Height="41" Click="btnDeleteMarkedMainMeal_Click" Grid.Column="1"/>
+                    <Button x:Name="btnDeleteMarkedSecondMeal" Content="Auswahl löschen" HorizontalAlignment="Right" Margin="0,0,20,10" VerticalAlignment="Bottom" Width="178" RenderTransformOrigin="0.32,-0.1" Height="41" Click="btnDeleteMarkedSecondMeal_Click" Grid.Column="1"/>
                 </Grid>
 
             </TabItem>

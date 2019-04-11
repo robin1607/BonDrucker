@@ -44,6 +44,7 @@ namespace BonDrucker
             } 
         }
 
+        // TODO: Die bestehenden MealCombos werden so immer überschrieben -> Preise weg -.-
         private void generateMealCombos(MainMeal mainMeal)
         {
             List<IMeal> secondMeals = getSecondMealsFromCSV();
@@ -119,6 +120,7 @@ namespace BonDrucker
                 MainMeal meal = mealList.SelectedItem as MainMeal;
                 mainMeals.RemoveAt(mainMeals.FindIndex(x => x.guid == meal.guid));
                 CSVHandler.deleteRow(meal);
+                CSVHandler.deleteComboRows(meal);
                 mainMealList.Items.Refresh();
             }
         }
@@ -151,6 +153,7 @@ namespace BonDrucker
             {
                 clearAllSecondMealTextBoxes();
                 addSecondMealToDataGrid(meal);
+                generateMealCombos(meal);
                 CSVHandler.addToCSV(meal);
             }
         }
@@ -158,7 +161,6 @@ namespace BonDrucker
         private void btnDeleteMarkedSecondMeal_Click(object sender, RoutedEventArgs e)
         {
             deleteSecondMeal(secondMealList);
-
         }
 
         private void deleteSecondMeal(DataGrid mealList)
@@ -168,6 +170,7 @@ namespace BonDrucker
                 SecondMeal meal = mealList.SelectedItem as SecondMeal;
                 secondMeals.RemoveAt(secondMeals.FindIndex(x => x.guid == meal.guid));
                 CSVHandler.deleteRow(meal);
+                CSVHandler.deleteComboRows(meal);
                 secondMealList.Items.Refresh();
             }
         }
@@ -175,6 +178,19 @@ namespace BonDrucker
         private List<IMeal> getSecondMealsFromCSV()
         {
             return CSVHandler.readMeals("BonDrucker.SecondMeal");
+        }
+
+        private void generateMealCombos(SecondMeal secondMeal)
+        {
+            List<IMeal> mainMeals = getMainMealsFromCSV();
+            List<MealCombination> mealCombos = new List<MealCombination>();
+            MealCombination mealCombo;
+            foreach (MainMeal mainMeal in mainMeals)
+            {
+                mealCombo = MealCombination.getMealCombination(mainMeal, secondMeal);
+                mealCombos.Add(mealCombo);
+            }
+            CSVHandler.addToCSV(mealCombos);
         }
 
         private void addSecondMealToDataGrid(IMeal meal)

@@ -26,6 +26,7 @@ namespace BonDrucker
         public secondMealChooser()
         {
             InitializeComponent();
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
 
         public secondMealChooser(MainMeal mainMeal)
@@ -48,6 +49,10 @@ namespace BonDrucker
                 newBtn.Content = combo.secondMealName;
                 newBtn.Name = "secondMealButton";
                 newBtn.Tag = combo;
+                newBtn.IsEnabled = !CSVHandler.isSecondMealDeactivated(combo.secondMealGUID);
+                newBtn.Margin = new Thickness(5, 0, 5, 0);
+                newBtn.FontSize = 18;
+                newBtn.MinHeight = 200;
                 newBtn.Click += new RoutedEventHandler(secondMealButton_click);
 
                 Grid.SetColumn(newBtn, index);

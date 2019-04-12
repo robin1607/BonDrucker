@@ -22,14 +22,17 @@ namespace BonDrucker
     {
         private List<IMeal> mainMeals;
         private List<IMeal> secondMeals;
+        private bool isOnInitProcess = true;
         public mainMealEditer()
         {
             InitializeComponent();
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
             mainMeals = getMainMealsFromCSV();
             mainMeals.ForEach(i => Console.Write("{0}\t", i.insertable));
             secondMeals = getSecondMealsFromCSV();
             addMainMealsToDataGrid(mainMeals);
             addSecondMealsToDataGrid(secondMeals);
+            isOnInitProcess = false;
         }
 
         private void btnSafeNewMainMeal_Click(object sender, RoutedEventArgs e)
@@ -137,9 +140,49 @@ namespace BonDrucker
             }
         }
 
-        void insertableChanged(object sender, RoutedEventArgs e)
+        // ##############################################################
+        //                       Shared:
+        // ##############################################################
+
+        private void checkBox_soldOut(object sender, RoutedEventArgs e)
         {
-            
+            try
+            {
+                if (sender != null)
+                {
+                    var result = sender as CheckBox;
+                    IMeal meal = result.DataContext as IMeal;
+                    meal.soldOut = result.IsChecked.HasValue ? result.IsChecked.Value : false;
+                    changeMeal(meal);
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void checkBox_Insertable(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (sender != null)
+                {
+                    var result = sender as CheckBox;
+                    IMeal meal = result.DataContext as IMeal;
+                    meal.insertable = result.IsChecked.HasValue ? result.IsChecked.Value : false;
+                    changeMeal(meal);
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void changeMeal(IMeal meal)
+        {
+            CSVHandler.updateCSV(meal);
         }
 
         // ##############################################################

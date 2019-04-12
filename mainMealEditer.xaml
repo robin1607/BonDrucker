@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BonDrucker"
         mc:Ignorable="d"
-        Title="mainMealEditer" Height="730.91" Width="1040.23"
+        Title="mainMealEditer" Height="786.41" Width="1157.23"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -25,21 +25,26 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1.2*"/>
+                        <ColumnDefinition Width="1.3*"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="mainMealList" AutoGenerateColumns="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Grid.Row="1" KeyDown="mealListe_KeyDown" Grid.ColumnSpan="2">
+                    <DataGrid x:Name="mainMealList" FontSize="18" AutoGenerateColumns="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Grid.Row="1" KeyDown="mealListe_KeyDown" Grid.ColumnSpan="2">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Hauptessen" Binding="{Binding Path=mealName}" IsReadOnly="True" Width="8*"/>
                             <DataGridTextColumn Header="Einzelpreis" Binding="{Binding Path=price, StringFormat=C2}" IsReadOnly="True" Width="2*"/>
-                            <DataGridCheckBoxColumn Header="Beilagenfähig" Binding="{Binding Path=insertable, Mode=TwoWay}" IsReadOnly="False" Width="2*">
-                                <DataGridCheckBoxColumn.CellStyle>
-                                    <Style>
-                                        <EventSetter Event="CheckBox.Checked" Handler="insertableChanged"/>
-                                        <EventSetter Event="CheckBox.Unchecked" Handler="insertableChanged"/>
-                                    </Style>
-                                </DataGridCheckBoxColumn.CellStyle>
-                            </DataGridCheckBoxColumn>
-                            <DataGridCheckBoxColumn  Header="Ausverkauft" Binding="{Binding Path=soldOut, Mode=TwoWay}" IsReadOnly="False" Width="2*"/>
+                            <DataGridTemplateColumn Header="Beilagenfähig" Width="2*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox IsChecked="{Binding Path=insertable, Mode=TwoWay}" Click="checkBox_Insertable" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Ausverkauft" Width="2*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox IsChecked="{Binding Path=soldOut, Mode=TwoWay}" Click="checkBox_soldOut" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                         </DataGrid.Columns>
                         <DataGrid.ItemContainerStyle>
                             <Style TargetType="DataGridRow">
@@ -54,12 +59,12 @@
                           Style="{DynamicResource MaterialDesignGroupBox}"
                           Margin="0,5,10,0"
                           materialDesign:ShadowAssist.ShadowDepth="Depth3"
-                          BorderThickness="0" Grid.Column="1" Height="228" Width="529">
+                          BorderThickness="0" Grid.Column="1" Height="255" Width="498">
                         <TextBlock TextWrapping="Wrap">            
                             Hier können die Haupgerichte hinzugefügt werden. Markiert man ein Hauptgericht als Beilagenfähig werden automatisch die im Tab "Beilagen" hinterlegten Beilage kombiniert. Per Doppelklick auf ein Hauptgericht öffnet sich ein neues Fenster in welchem die Kombinationspreise angepasst werden können. Standardmäßig sind das die beiden Einzelpreise addiert.
                         </TextBlock>
                     </GroupBox>
-                    <GroupBox Header="Neues Hauptessen hinzufügen" Margin="0,5,35,5">
+                    <GroupBox Header="Neues Hauptessen hinzufügen" Margin="5,5,10,5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                         <Grid>
                             <TextBox x:Name="txtBoxMainMeal"
                         Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
@@ -69,7 +74,7 @@
                         HorizontalAlignment="Left"
                         TextWrapping="Wrap"
                         MaxWidth="400"
-                        materialDesign:HintAssist.Hint="Hauptgericht" Margin="10,0,130,0" Width="273"/>
+                        materialDesign:HintAssist.Hint="Hauptgericht" Margin="10,0,0,0" Width="310"/>
                             <TextBox x:Name="txtBoxMainMealSinglePrice"
                             Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                             VerticalAlignment="Top"
@@ -78,7 +83,7 @@
                             TextWrapping="Wrap"
                             HorizontalAlignment="Left"
                             MaxWidth="400"
-                            materialDesign:HintAssist.Hint="Einzelpreis" Margin="10,84,130,0" Width="273"/>
+                            materialDesign:HintAssist.Hint="Einzelpreis" Margin="10,84,0,0" Width="310"/>
                             <CheckBox x:Name="checkBoxInertable"
                             Style="{StaticResource MaterialDesignCheckBox}" Margin="10,159,223,10">
                                 Beilagenfähig
@@ -93,22 +98,22 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1.2*"/>
+                        <ColumnDefinition Width="1.3*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="2*" />
-                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
                     </Grid.RowDefinitions>
-                    <GroupBox Header="Neue Beilage hinzufügen" Margin="0,5,42.5,5">
+                    <GroupBox Header="Neue Beilage hinzufügen" Margin="5,5,10,5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                         <Grid>
                             <TextBox x:Name="txtBoxSecondMeal"
-                        Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
-                        VerticalAlignment="Top"
-                        AcceptsReturn="True"
-                        TextWrapping="Wrap"
-                        HorizontalAlignment="Left"
-                        MaxWidth="400"
-                        materialDesign:HintAssist.Hint="Beilage" Margin="10,0,0,0" Width="273"/>
+                            Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                            VerticalAlignment="Top"
+                            AcceptsReturn="True"
+                            TextWrapping="Wrap"
+                            HorizontalAlignment="Left"
+                            MaxWidth="400"
+                            materialDesign:HintAssist.Hint="Beilage" Margin="10,0,0,0" Width="310"/>
                             <TextBox x:Name="txtBoxSecondMealSinglePrice"
                             Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                             VerticalAlignment="Top"
@@ -116,7 +121,7 @@
                             TextWrapping="Wrap"
                             HorizontalAlignment="Left"
                             MaxWidth="400"
-                            materialDesign:HintAssist.Hint="Einzelpreis" Margin="10,73,0,0" Width="273"/>
+                            materialDesign:HintAssist.Hint="Einzelpreis" Margin="10,84,0,0" Width="310"/>
                             <Button x:Name="btnSafeNewSecondMeal" Content="Speichern" HorizontalAlignment="Right" Margin="208,212,10,10" VerticalAlignment="Bottom" Width="178" Height="41" Click="btnSafeNewSecondMeal_Click"/>
                         </Grid>
                     </GroupBox>
@@ -127,16 +132,22 @@
                           Style="{DynamicResource MaterialDesignGroupBox}"
                           Margin="0,5,10,0"
                           materialDesign:ShadowAssist.ShadowDepth="Depth3"
-                          BorderThickness="0" Grid.Column="1" Height="228" Width="529">
+                          BorderThickness="0" Grid.Column="1" Height="228" Width="498">
                         <TextBlock TextWrapping="Wrap">            
                             Hier können die Beilagen hinzugefügt werden. Die Beilagen werden automatisch den "Beilagenfähigen" Hauptgerichten zugeordnet.
                         </TextBlock>
                     </GroupBox>
-                    <DataGrid x:Name="secondMealList" AutoGenerateColumns="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Grid.Row="1" KeyDown="mealListe_KeyDown" Grid.ColumnSpan="2">
+                    <DataGrid x:Name="secondMealList" FontSize="18" AutoGenerateColumns="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Grid.Row="1" KeyDown="mealListe_KeyDown" Grid.ColumnSpan="2">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Beilage" Binding="{Binding Path=mealName}" Width="8*"/>
-                            <DataGridTextColumn Header="Einzelpreis" Binding="{Binding Path=price}" Width="2*"/>
-                            <DataGridCheckBoxColumn  Header="Ausverkauft" Width="2*"/>
+                            <DataGridTextColumn Header="Einzelpreis" Binding="{Binding Path=price, StringFormat=C2}" Width="2*"/>
+                            <DataGridTemplateColumn Header="Ausverkauft" Width="2*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox IsChecked="{Binding Path=soldOut, Mode=TwoWay}" Click="checkBox_soldOut" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                     <Button x:Name="btnDeleteMarkedSecondMeal" Content="Auswahl löschen" HorizontalAlignment="Right" Margin="0,0,20,10" VerticalAlignment="Bottom" Width="178" RenderTransformOrigin="0.32,-0.1" Height="41" Click="btnDeleteMarkedSecondMeal_Click" Grid.Column="1"/>

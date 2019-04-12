@@ -36,39 +36,25 @@ namespace BonDrucker
             List<IMeal> mainMeals = getMainMealsFromCSV();
             btnGrid.Children.Clear();
             int index = 0;
+            btnGrid.ColumnDefinitions.Clear();
             foreach (IMeal meal in mainMeals)
             {
                 Button newBtn = new Button();
-                if (index % 4 == 0)
-                {
-                    btnGrid.RowDefinitions.Add(new RowDefinition());
-                }
-                else
-                {
-                    btnGrid.ColumnDefinitions.Add(new ColumnDefinition());
-                }
+                btnGrid.ColumnDefinitions.Add(new ColumnDefinition());
 
                 newBtn.Content = meal.mealName;
                 newBtn.Tag = meal;
                 newBtn.FontSize = 18;
+                newBtn.IsEnabled = !meal.soldOut;
                 newBtn.MinHeight = 120;
+                newBtn.Margin = new Thickness(5,0,5,0);
                 newBtn.Name = meal.insertable.ToString()  + "_mainMealButton";
                 newBtn.Click += new RoutedEventHandler(mainMealButton_click);
-                if (index % 4 == 0)
-                {
-                    Grid.SetRow(newBtn, index);
 
-                }
-                else
-                {
-                    Grid.SetColumn(newBtn, index);
-
-                }
-
+                Grid.SetColumn(newBtn, index);
                 index++;
                 btnGrid.Children.Add(newBtn);
             }
-
         }
 
         private List<IMeal> getMainMealsFromCSV()
@@ -85,6 +71,7 @@ namespace BonDrucker
         {
             mainMealEditer mE = new mainMealEditer();
             mE.ShowDialog();
+            addButtonsToForm();
         }
 
         protected void mainMealButton_click(object sender, EventArgs e)
@@ -94,7 +81,7 @@ namespace BonDrucker
             if (mainMeal.insertable)
             {
                 secondMealChooser smc = new secondMealChooser(mainMeal);
-                if(smc.ShowDialog() == false)
+                if (smc.ShowDialog() == false)
                 {
                     MealCombination combo = smc._mealCombo;
                     if (combo != null)
@@ -105,6 +92,10 @@ namespace BonDrucker
 
                 }
             }
+            else
+            {
+                addSingleMainMealToDataGrid(mainMeal);
+            }
         }
 
         private void addMealCombosToDataGrid(MealCombination combo)
@@ -112,6 +103,17 @@ namespace BonDrucker
             _mealCombos.Add(combo);
             dataGrid.Items.Refresh();
         }
+
+        private void addSingleMainMealToDataGrid(MainMeal mainMeal)
+        {
+            SecondMeal secondMeal = new SecondMeal();
+            secondMeal.price = 0;
+            secondMeal.mealName = "ohne";
+            MealCombination mc = MealCombination.getMealCombination(mainMeal, secondMeal);
+            updateTotalPriceTxtBox(mainMeal.price);
+            addMealCombosToDataGrid(mc);
+        }
+
 
         // Keine Optimale Loesung .. aber funktioniert vorerst
         private void updateTotalPriceTxtBox(decimal price)

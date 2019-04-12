@@ -50,6 +50,12 @@ namespace BonDrucker
             return combos.FindAll(x => x.mainMealGUID == mainMeal.guid);
         }
 
+        public static bool isSecondMealDeactivated(Guid guid)
+        {
+            List<IMeal> secondMeals = readMeals("BonDrucker.SecondMeal");
+            return ((secondMeals.FindAll(x => x.guid == guid && x.soldOut == true)).Count > 0);
+        }
+
         public static void updateCSV(IMeal meal)
         {
             string type = meal.GetType().ToString();
@@ -75,7 +81,7 @@ namespace BonDrucker
             string type = meal.GetType().ToString();
             writeFileNameToProperty(type);
             var mealList = readMeals(type);
-            // Suche Index des zu aktualisierenden Element ueber die GUID
+            // Suche Index des zu loeschenden Element ueber die GUID
             int index = mealList.FindIndex(x => x.guid == meal.guid);
             mealList.RemoveAt(index);
             write(mealList);

@@ -5,17 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BonDrucker"
         mc:Ignorable="d"
-        Title="mealCombinationEditer" Height="362.248" Width="604.323">
+        Title="mealCombinationEditer" Height="395.18" Width="669.272"
+        Language="de-GER">
     <Grid>
-        <DataGrid x:Name="dataGrid" HorizontalAlignment="Center" AutoGenerateColumns="False" VerticalAlignment="Top" Width="596" Height="298">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.2*"/>
+        </Grid.RowDefinitions>
+        <DataGrid x:Name="dataGrid" FontSize="18" HorizontalAlignment="Stretch" AutoGenerateColumns="False" VerticalAlignment="Stretch" Margin="5,5,5,5">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Hauptessen" Binding="{Binding Path=mainMealName}" IsReadOnly="True" Width="8*"/>
                 <DataGridTextColumn Header="Beilage" Binding="{Binding Path=secondMealName}" IsReadOnly="True" Width="8*"/>
-                <DataGridTextColumn Header="Gesamtpreis" Binding="{Binding Path=totalPrice}" IsReadOnly="False" Width="6*"/>
+                <DataGridTextColumn Header="Gesamtpreis" Binding="{Binding Path=totalPrice, StringFormat=C2}" IsReadOnly="False" Width="6*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="btnCancel" Content="Abbrechen" HorizontalAlignment="Left" Margin="10,301,0,0" VerticalAlignment="Top" Width="100" Click="btnCancel_Click"/>
-        <Button x:Name="btnSave" Content="Speichern" HorizontalAlignment="Left" Margin="486,303,0,0" VerticalAlignment="Top" Width="100" Click="btnSave_Click"/>
+        <Button x:Name="btnCancel" Content="Abbrechen" HorizontalAlignment="Left" Margin="10,16.939,10,10" VerticalAlignment="Bottom" Width="100" Click="btnCancel_Click" Grid.Row="1"/>
+        <Button x:Name="btnSave" Content="Speichern" HorizontalAlignment="Right" Margin="551,17,10,10" VerticalAlignment="Bottom" Width="100" Click="btnSave_Click" Grid.Row="1"/>
 
     </Grid>
 </Window>

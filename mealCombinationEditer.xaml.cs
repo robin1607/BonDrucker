@@ -16,6 +16,7 @@ namespace BonDrucker
         public mealCombinationEditer()
         {
             InitializeComponent();
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
 
         public mealCombinationEditer(MainMeal meal)

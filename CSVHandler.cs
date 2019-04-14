@@ -84,7 +84,14 @@ namespace BonDrucker
             // Suche Index des zu loeschenden Element ueber die GUID
             int index = mealList.FindIndex(x => x.guid == meal.guid);
             mealList.RemoveAt(index);
-            write(mealList);
+            if (mealList.Count == 0)
+            {
+                deleteAll(type);
+            }
+            else
+            {
+                write(mealList);
+            }
         }
 
         public static void deleteComboRows(IMeal meal)
@@ -101,7 +108,14 @@ namespace BonDrucker
             {
                 mealList.RemoveAll(x => x.secondMealGUID == meal.guid);
             }
-            write(mealList);
+            if (mealList.Count == 0)
+            {
+                deleteAll(type);
+            }
+            else
+            {
+                write(mealList);
+            }
         }
 
 
@@ -136,6 +150,23 @@ namespace BonDrucker
                 {
                     meal.ForEach(i => Console.Write("{0}\t", i.insertable));
                     csv.WriteRecords(meal);
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.Log(ex);
+            }
+        }
+
+        private static void deleteAll(string type)
+        {
+            try
+            {
+                writeFileNameToProperty(type);
+                using (var writer = new StreamWriter(_filePath + _fileName))
+                using (var csv = new CsvWriter(writer))
+                {
+                    csv.WriteRecords((List<IMeal>)Activator.CreateInstance(Type.GetType(type)));
                 }
             }
             catch (Exception ex)

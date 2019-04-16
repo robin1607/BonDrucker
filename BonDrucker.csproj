@@ -80,6 +80,7 @@
     <Compile Include="Models\IMeal.cs" />
     <Compile Include="Models\mainMeal.cs" />
     <Compile Include="Models\mealCombination.cs" />
+    <Compile Include="Models\statistic.cs" />
     <Compile Include="PrintingHandler.cs" />
     <Compile Include="secondMealChooser.xaml.cs">
       <DependentUpon>secondMealChooser.xaml</DependentUpon>

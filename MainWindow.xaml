@@ -36,7 +36,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="bntDelete" Content="Löschen" HorizontalAlignment="Left" Margin="839,91,0,0" Grid.Row="1" VerticalAlignment="Top" Width="189" Height="30" Click="bntDelete_Click"/>
-        <Button x:Name="bntPrint" Content="Drucken" HorizontalAlignment="Left" Margin="839,126,0,0" Grid.Row="1" VerticalAlignment="Top" Width="189" Height="58"/>
+        <Button x:Name="bntPrint" Content="Drucken" HorizontalAlignment="Left" Margin="839,126,0,0" Grid.Row="1" VerticalAlignment="Top" Width="189" Height="58" Click="bntPrint_Click"/>
         <TextBox x:Name="txtBoxTotalPrice" Text="0,00 €" TextAlignment="Right" FontSize="16px" IsReadOnly="True" HorizontalAlignment="Left" Height="30" Margin="839,56,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="189"/>
         <Label x:Name="lbToalPrice" FontSize="20" Content="Gesamtpreis:" HorizontalAlignment="Left" Margin="839,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="184" Height="41"/>
         <Grid x:Name="btnGrid" HorizontalAlignment="Stretch" Grid.Row="0" VerticalAlignment="Stretch" Margin="15,40,15,20"/>

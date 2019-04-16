@@ -2,6 +2,7 @@
 using CsvHelper;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.IO;
 using System.Linq;
 
@@ -42,6 +43,22 @@ namespace BonDrucker
             }
             // Write the new List sorted by mainMeals
             write(mealList.OrderBy(x => x.mainMealGUID).ToList());
+        }
+
+        public static void addToStatistic(List<MealCombination> mealCombo)
+        {
+            List<Statistic> statisticList = readStatistic();
+            foreach (MealCombination combo in mealCombo)
+            {
+                Statistic stat = new Statistic
+                {
+                    timeStamp = DateTime.Now,
+                    mealCombination = combo
+                };
+                statisticList.Add(stat);
+            }
+            // Write the Statistics sorted by TimeStamp
+            writeStatistic(statisticList.OrderBy(x => x.timeStamp).ToList());
         }
 
         public static List<MealCombination> getMealCombinationsFromCSV(MainMeal mainMeal)
@@ -138,6 +155,13 @@ namespace BonDrucker
                 _fileName = MealCombination.csvFileName;
                 return;
             }
+
+            if (type.Contains("Statistic"))
+            {
+                _fileName = Statistic.csvFileName;
+                return;
+            }
+
         }
 
         private static void write(List<IMeal> meal)
@@ -184,6 +208,23 @@ namespace BonDrucker
                 using (var csv = new CsvWriter(writer))
                 {
                     csv.WriteRecords(mealCombo);
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.Log(ex);
+            }
+        }
+
+        private static void writeStatistic(List<Statistic> statistic)
+        {
+            try
+            {
+                writeFileNameToProperty(statistic.First().GetType().ToString());
+                using (var writer = new StreamWriter(_filePath + _fileName))
+                using (var csv = new CsvWriter(writer))
+                {
+                    csv.WriteRecords(statistic);
                 }
             }
             catch (Exception ex)
@@ -256,6 +297,36 @@ namespace BonDrucker
             {
                 ExceptionHandler.Log(ex);
                 return new List<MealCombination>();
+            }
+        }
+
+        public static List<Statistic> readStatistic()
+        {
+            try
+            {
+                writeFileNameToProperty("BonDrucker.Statistic");
+                using (var reader = new StreamReader(_filePath + _fileName))
+                using (var csv = new CsvReader(reader))
+                {
+                    var records = new List<Statistic>();
+                    csv.Read();
+                    csv.ReadHeader();
+                    while (csv.Read())
+                    {
+                        var record = new Statistic();
+                        record.timeStamp = csv.GetField<DateTime>("timeStamp");
+                        record.mealCombination.mainMealName = csv.GetField<string>("mainMealName");
+                        record.mealCombination.secondMealName = csv.GetField<string>("secondMealName");
+                        record.mealCombination.totalPrice = csv.GetField<decimal>("totalPrice");
+                        records.Add(record);
+                    }
+                    return records;
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.Log(ex);
+                return new List<Statistic>();
             }
         }
     }

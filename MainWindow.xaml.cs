@@ -128,11 +128,22 @@ namespace BonDrucker
             txtBoxTotalPrice.Text = _totalPrice + " €";
         }
 
-        private void bntDelete_Click(object sender, RoutedEventArgs e)
+        private void resetForm()
         {
             _mealCombos = new List<MealCombination>();
             resetTotalPriceTxtBox();
             dataGrid.ItemsSource = _mealCombos;
+        }
+
+        private void bntDelete_Click(object sender, RoutedEventArgs e)
+        {
+            resetForm();
+        }
+
+        private void bntPrint_Click(object sender, RoutedEventArgs e)
+        {
+            CSVHandler.addToStatistic(_mealCombos);
+            resetForm();
         }
     }
 }

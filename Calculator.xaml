@@ -1,0 +1,33 @@
+﻿<Window x:Class="BonDrucker.Calculator"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BonDrucker"
+        mc:Ignorable="d"
+        Title="Calculator" Height="200.757" Width="378.03"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="20"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Language="de-GER">
+    <Grid>
+        <TextBox x:Name="txtMoneyIn"
+                        Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                        VerticalAlignment="Top"
+                        Height="70"
+                        HorizontalAlignment="Stretch"
+                        materialDesign:HintAssist.Hint="Bekommen" TextChanged="txtMoneyIn_TextChanged"/>
+        <TextBox x:Name="txtMoneyOut"
+                        Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                        VerticalAlignment="Top"
+                         IsReadOnly="True"
+                        Height="70"
+                        HorizontalAlignment="Stretch"
+                        materialDesign:HintAssist.Hint="Rausgeben" Margin="0,90,0,0"/>
+    </Grid>
+</Window>

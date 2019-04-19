@@ -1,0 +1,32 @@
+﻿<Window x:Class="BonDrucker.StatisticViewer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BonDrucker"
+        mc:Ignorable="d"
+        Title="StatisticViewer" Height="368.182" Width="566.667">
+    <Grid>
+        <DataGrid x:Name="dataGrid" HorizontalAlignment="Stretch" Margin="2,0,2,2" VerticalAlignment="Stretch">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Hauptessen" Binding="{Binding Path=mealName}" IsReadOnly="True" Width="8*"/>
+                <DataGridTextColumn Header="Einzelpreis" Binding="{Binding Path=price, StringFormat=C2}" IsReadOnly="True" Width="2*"/>
+                <DataGridTemplateColumn Header="Beilagenfähig" Width="2*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding Path=insertable, Mode=TwoWay}" Click="checkBox_Insertable" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Ausverkauft" Width="2*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding Path=soldOut, Mode=TwoWay}" Click="checkBox_soldOut" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Window>

@@ -143,6 +143,9 @@ namespace BonDrucker
         private void bntPrint_Click(object sender, RoutedEventArgs e)
         {
             CSVHandler.addToStatistic(_mealCombos);
+            PrintingHandler.Print(_mealCombos);
+            Calculator c = new Calculator(_totalPrice);
+            c.ShowDialog();
             resetForm();
         }
     }

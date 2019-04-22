@@ -148,5 +148,10 @@ namespace BonDrucker
             c.ShowDialog();
             resetForm();
         }
+
+        private void showStatistic(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

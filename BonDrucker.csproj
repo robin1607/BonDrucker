@@ -89,6 +89,12 @@
     <Compile Include="secondMealChooser.xaml.cs">
       <DependentUpon>secondMealChooser.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SettingsEditer.xaml.cs">
+      <DependentUpon>SettingsEditer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StatisticViewer.xaml.cs">
+      <DependentUpon>StatisticViewer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="XMLHandler.cs" />
     <Page Include="Calculator.xaml">
       <SubType>Designer</SubType>
@@ -115,6 +121,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="secondMealChooser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingsEditer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StatisticViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

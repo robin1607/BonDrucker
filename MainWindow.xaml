@@ -22,10 +22,14 @@
         </Grid.RowDefinitions>
         <Menu x:Name="menu" FontSize="16" HorizontalAlignment="Stretch" Height="35" VerticalAlignment="Top" Width="Auto">
             <MenuItem Header="Menü">
+                <MenuItem Header="Einstellungen" Click="showStatistic"/>
                 <MenuItem Header="Programm beenden" HorizontalAlignment="Left" Width="201" Margin="0,0,-61,0" Click="closeProgramm"/>
             </MenuItem>
-            <MenuItem Header="Einstellungen">
+            <MenuItem Header="Bearbeiten">
                 <MenuItem Header="Essen bearbeiten" Click="editMeals"/>
+            </MenuItem>
+            <MenuItem Header="Anzeige">
+                <MenuItem Header="Statistik" Click="showStatistic"/>
             </MenuItem>
         </Menu>
         <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" AutoGenerateColumns="False" CanUserAddRows="false" Grid.Row="1" VerticalAlignment="Top" Height="184" Width="677" RenderTransformOrigin="0.5,0.5">

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BonDrucker"
         mc:Ignorable="d"
-        Title="Bondrucker Feuerwehr Thalexweiler" Height="709.343" Width="1046.458"
+        Title="Bondrucker Feuerwehr Thalexweiler" Height="731.843" Width="1088.458"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -18,12 +18,11 @@
     <Grid Name="grid">
         <Grid.RowDefinitions>
             <RowDefinition Height="5*" />
-            <RowDefinition Height="2*" />
+            <RowDefinition Height="2.2*" />
         </Grid.RowDefinitions>
         <Menu x:Name="menu" FontSize="16" HorizontalAlignment="Stretch" Height="35" VerticalAlignment="Top" Width="Auto">
             <MenuItem Header="Menü">
-                <MenuItem Header="Einstellungen" Click="showStatistic"/>
-                <MenuItem Header="Programm beenden" HorizontalAlignment="Left" Width="201" Margin="0,0,-61,0" Click="closeProgramm"/>
+                <MenuItem Header="Programm beenden" HorizontalAlignment="Left" Width="200" Margin="0,0,0,0" Click="closeProgramm"/>
             </MenuItem>
             <MenuItem Header="Bearbeiten">
                 <MenuItem Header="Essen bearbeiten" Click="editMeals"/>
@@ -32,17 +31,17 @@
                 <MenuItem Header="Statistik" Click="showStatistic"/>
             </MenuItem>
         </Menu>
-        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" AutoGenerateColumns="False" CanUserAddRows="false" Grid.Row="1" VerticalAlignment="Top" Height="184" Width="677" RenderTransformOrigin="0.5,0.5">
+        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" AutoGenerateColumns="False" CanUserAddRows="false" Grid.Row="1" VerticalAlignment="Bottom"  RenderTransformOrigin="0.5,0.5" Margin="10,0,0,10" Height="194" Width="716">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Essen" Binding="{Binding Path=mainMealName}" Width="4*"/>
                 <DataGridTextColumn Header="Beilage" Binding="{Binding Path=secondMealName}" Width="4*"/>
                 <DataGridTextColumn  Header="Preis" Binding="{Binding Path=totalPrice, StringFormat=C2}" Width="1*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="bntDelete" Content="Löschen" HorizontalAlignment="Left" Margin="839,91,0,0" Grid.Row="1" VerticalAlignment="Top" Width="189" Height="30" Click="bntDelete_Click"/>
-        <Button x:Name="bntPrint" Content="Drucken" HorizontalAlignment="Left" Margin="839,126,0,0" Grid.Row="1" VerticalAlignment="Top" Width="189" Height="58" Click="bntPrint_Click"/>
-        <TextBox x:Name="txtBoxTotalPrice" Text="0,00 €" TextAlignment="Right" FontSize="16px" IsReadOnly="True" HorizontalAlignment="Left" Height="30" Margin="839,56,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="189"/>
-        <Label x:Name="lbToalPrice" FontSize="20" Content="Gesamtpreis:" HorizontalAlignment="Left" Margin="839,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="184" Height="41"/>
+        <Button x:Name="bntDelete" Content="Löschen" HorizontalAlignment="Right" Margin="0,0,15,174" VerticalAlignment="Bottom" Width="189" Height="30" Click="bntDelete_Click" Grid.Row="1"/>
+        <Button x:Name="bntPrint" Content="Drucken" HorizontalAlignment="Right" Margin="0,0,10,10" Grid.Row="1" VerticalAlignment="Bottom" Width="189" Height="72" Click="bntPrint_Click"/>
+        <TextBox x:Name="txtBoxTotalPrice" Text="0,00 €" TextAlignment="Right" FontSize="16px" IsReadOnly="True" HorizontalAlignment="Right" Height="30" Margin="0,0,10,87" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="189"/>
+        <Label x:Name="lbToalPrice" FontSize="20" Content="Gesamtpreis:" HorizontalAlignment="Right" Margin="0,0,15,117" Grid.Row="1" VerticalAlignment="Bottom" Width="184" Height="41"/>
         <Grid x:Name="btnGrid" HorizontalAlignment="Stretch" Grid.Row="0" VerticalAlignment="Stretch" Margin="15,40,15,20"/>
     </Grid>
 </Window>

@@ -44,9 +44,19 @@ namespace BonDrucker
                         new SolidBrush(Color.Black), startX, startY + Offset);
             Offset = Offset + 30;
 
-            graphics.DrawString("mit " + _combo.secondMealName,
-                        new Font("Courier New", 16, FontStyle.Bold),
-                        new SolidBrush(Color.Black), startX, startY + Offset);
+            if (_combo.secondMealName.Contains("ohne"))
+            {
+                graphics.DrawString("ohne Beilage",
+                new Font("Courier New", 16, FontStyle.Bold),
+                new SolidBrush(Color.Black), startX, startY + Offset);
+            }
+            else
+            {
+                graphics.DrawString("mit " + _combo.secondMealName,
+                new Font("Courier New", 16, FontStyle.Bold),
+                new SolidBrush(Color.Black), startX, startY + Offset);
+               
+            }
 
             Offset = Offset + 35;
 

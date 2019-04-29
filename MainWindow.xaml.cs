@@ -28,6 +28,7 @@ namespace BonDrucker
             InitializeComponent();
             addButtonsToForm();
             dataGrid.ItemsSource = _mealCombos;
+            bntPrint.IsEnabled = false;
             txtBoxTotalPrice.DataContext = this;
         }
 
@@ -36,22 +37,35 @@ namespace BonDrucker
             List<IMeal> mainMeals = getMainMealsFromCSV();
             btnGrid.Children.Clear();
             int index = 0;
+            int indexRow = 0;
             btnGrid.ColumnDefinitions.Clear();
+            btnGrid.RowDefinitions.Clear();
+            btnGrid.RowDefinitions.Add(new RowDefinition());
             foreach (IMeal meal in mainMeals)
             {
                 Button newBtn = new Button();
-                btnGrid.ColumnDefinitions.Add(new ColumnDefinition());
-
                 newBtn.Content = meal.mealName;
                 newBtn.Tag = meal;
                 newBtn.FontSize = 18;
                 newBtn.IsEnabled = !meal.soldOut;
                 newBtn.MinHeight = 120;
+                newBtn.MinWidth = 100;
                 newBtn.Margin = new Thickness(5,0,5,0);
                 newBtn.Name = meal.insertable.ToString()  + "_mainMealButton";
                 newBtn.Click += new RoutedEventHandler(mainMealButton_click);
-
+                if (index < 6 && indexRow == 0)
+                {
+                    btnGrid.ColumnDefinitions.Add(new ColumnDefinition());
+                }
+                if (index == 6)
+                {
+                    btnGrid.RowDefinitions.Add(new RowDefinition());
+                    indexRow++;
+                    index = 0;
+                }
+                Grid.SetRow(newBtn, indexRow);
                 Grid.SetColumn(newBtn, index);
+
                 index++;
                 btnGrid.Children.Add(newBtn);
             }
@@ -97,6 +111,8 @@ namespace BonDrucker
             {
                 addSingleMainMealToDataGrid(mainMeal);
             }
+            bntPrint.IsEnabled = true;
+
         }
 
         private void addMealCombosToDataGrid(MealCombination combo)
@@ -133,6 +149,7 @@ namespace BonDrucker
         {
             _mealCombos = new List<MealCombination>();
             resetTotalPriceTxtBox();
+            bntPrint.IsEnabled = false;
             dataGrid.ItemsSource = _mealCombos;
         }
 
@@ -143,12 +160,15 @@ namespace BonDrucker
 
         private void bntPrint_Click(object sender, RoutedEventArgs e)
         {
-            CSVHandler.addToStatistic(_mealCombos);
-            // PrintingHandler.Print(_mealCombos);
-            Calculator c = new Calculator(_totalPrice);
-            c.Owner = this;
-            c.ShowDialog();
-            resetForm();
+            if(_mealCombos.Count > 0)
+            {
+                CSVHandler.addToStatistic(_mealCombos);
+                PrintingHandler.Print(_mealCombos);
+                Calculator c = new Calculator(_totalPrice);
+                c.Owner = this;
+                c.ShowDialog();
+                resetForm();
+            }
         }
 
         private void showStatistic(object sender, RoutedEventArgs e)

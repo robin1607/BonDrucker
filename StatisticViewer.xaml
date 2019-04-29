@@ -23,7 +23,7 @@
                         <DataGridTextColumn Header="Zeitstempel" Binding="{Binding Path=timeStamp}" IsReadOnly="True" Width="3*"/>
                         <DataGridTextColumn Header="Hauptessen" Binding="{Binding Path=mealCombination.mainMealName}" IsReadOnly="True" Width="3*"/>
                         <DataGridTextColumn Header="Beilage" Binding="{Binding Path=mealCombination.secondMealName}" IsReadOnly="True" Width="3*"/>
-                        <DataGridTextColumn Header="Einzelpreis" Binding="{Binding Path=mealCombination.totalPrice, StringFormat=C2}" IsReadOnly="True" Width="2*"/>
+                        <DataGridTextColumn Header="Gesamtpreis" Binding="{Binding Path=mealCombination.totalPrice, StringFormat=C2}" IsReadOnly="True" Width="2*"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
@@ -33,7 +33,7 @@
                         <DataGridTextColumn Header="Anzahl" Binding="{Binding Path=counter}" IsReadOnly="True" Width="1*"/>
                         <DataGridTextColumn Header="Hauptessen" Binding="{Binding Path=mealCombination.mealCombination.mainMealName}" IsReadOnly="True" Width="3*"/>
                         <DataGridTextColumn Header="Beilage" Binding="{Binding Path=mealCombination.mealCombination.secondMealName}" IsReadOnly="True" Width="3*"/>
-                        <DataGridTextColumn Header="Einzelpreis" Binding="{Binding Path=mealCombination.mealCombination.totalPrice, StringFormat=C2}" IsReadOnly="True" Width="2*"/>
+                        <DataGridTextColumn Header="Gesamtpreis" Binding="{Binding Path=mealCombination.mealCombination.totalPrice, StringFormat=C2}" IsReadOnly="True" Width="2*"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>

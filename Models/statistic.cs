@@ -10,7 +10,7 @@ namespace BonDrucker.Models
     {
         public Statistic()
         {
-            this.mealCombination = new MealCombination();
+            this.mealCombination = new MealCombination(true);
         }
         public DateTime timeStamp { get; set; }
         public MealCombination mealCombination { get; set; }

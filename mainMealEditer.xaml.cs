@@ -22,13 +22,11 @@ namespace BonDrucker
     {
         private List<IMeal> mainMeals;
         private List<IMeal> secondMeals;
-        private bool isOnInitProcess = true;
         public mainMealEditer()
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             mainMeals = getMainMealsFromCSV();
-            mainMeals.ForEach(i => Console.Write("{0}\t", i.insertable));
             secondMeals = getSecondMealsFromCSV();
             addMainMealsToDataGrid(mainMeals);
             addSecondMealsToDataGrid(secondMeals);
@@ -47,7 +45,6 @@ namespace BonDrucker
             } 
         }
 
-        // TODO: Die bestehenden MealCombos werden so immer überschrieben -> Preise weg -.-
         private void generateMealCombos(MainMeal mainMeal)
         {
             List<IMeal> secondMeals = getSecondMealsFromCSV();

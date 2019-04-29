@@ -81,6 +81,7 @@ namespace BonDrucker
             if (mainMeal.insertable)
             {
                 secondMealChooser smc = new secondMealChooser(mainMeal);
+                smc.Owner = this;
                 if (smc.ShowDialog() == false)
                 {
                     MealCombination combo = smc._mealCombo;
@@ -143,15 +144,17 @@ namespace BonDrucker
         private void bntPrint_Click(object sender, RoutedEventArgs e)
         {
             CSVHandler.addToStatistic(_mealCombos);
-            PrintingHandler.Print(_mealCombos);
+            // PrintingHandler.Print(_mealCombos);
             Calculator c = new Calculator(_totalPrice);
+            c.Owner = this;
             c.ShowDialog();
             resetForm();
         }
 
         private void showStatistic(object sender, RoutedEventArgs e)
         {
-
+            StatisticViewer sv = new StatisticViewer();
+            sv.ShowDialog();
         }
     }
 }

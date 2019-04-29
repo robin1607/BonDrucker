@@ -5,36 +5,51 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BonDrucker"
         mc:Ignorable="d"
-        Title="StatisticViewer" Height="427.686" Width="708.919">
+        Title="StatisticViewer" Height="518.407" Width="947.602"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="18"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Language="de-GER">
     <Grid>
         <TabControl x:Name="tabControl" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch">
             <TabItem Header="Letze Bestellungen">
-                <DataGrid x:Name="dgLastOrders" HorizontalAlignment="Stretch" Margin="0,0,0,2" VerticalAlignment="Stretch">
+                <DataGrid x:Name="dgLastOrders" HorizontalAlignment="Stretch" AutoGenerateColumns="False" Margin="0,0,0,2" VerticalAlignment="Stretch">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Zeitstempel" Binding="{Binding Path=timeStamp}" IsReadOnly="True" Width="3*"/>
-                        <DataGridTextColumn Header="Hauptessen" Binding="{Binding Path=mainMealName}" IsReadOnly="True" Width="3*"/>
-                        <DataGridTextColumn Header="Beilage" Binding="{Binding Path=secondMealName}" IsReadOnly="True" Width="3*"/>
-                        <DataGridTextColumn Header="Einzelpreis" Binding="{Binding Path=totalPrice, StringFormat=C2}" IsReadOnly="True" Width="2*"/>
+                        <DataGridTextColumn Header="Hauptessen" Binding="{Binding Path=mealCombination.mainMealName}" IsReadOnly="True" Width="3*"/>
+                        <DataGridTextColumn Header="Beilage" Binding="{Binding Path=mealCombination.secondMealName}" IsReadOnly="True" Width="3*"/>
+                        <DataGridTextColumn Header="Einzelpreis" Binding="{Binding Path=mealCombination.totalPrice, StringFormat=C2}" IsReadOnly="True" Width="2*"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
             <TabItem Header="Menüs">
-                <DataGrid x:Name="dgMenus" HorizontalAlignment="Stretch" Margin="0,0,0,2" VerticalAlignment="Stretch">
+                <DataGrid x:Name="dgMenus" AutoGenerateColumns="False" HorizontalAlignment="Stretch" Margin="0,0,0,2" VerticalAlignment="Stretch">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Zeitstempel" Binding="{Binding Path=timeStamp}" IsReadOnly="True" Width="3*"/>
-                        <DataGridTextColumn Header="Hauptessen" Binding="{Binding Path=mainMealName}" IsReadOnly="True" Width="3*"/>
-                        <DataGridTextColumn Header="Beilage" Binding="{Binding Path=secondMealName}" IsReadOnly="True" Width="3*"/>
-                        <DataGridTextColumn Header="Einzelpreis" Binding="{Binding Path=totalPrice, StringFormat=C2}" IsReadOnly="True" Width="2*"/>
+                        <DataGridTextColumn Header="Anzahl" Binding="{Binding Path=counter}" IsReadOnly="True" Width="1*"/>
+                        <DataGridTextColumn Header="Hauptessen" Binding="{Binding Path=mealCombination.mealCombination.mainMealName}" IsReadOnly="True" Width="3*"/>
+                        <DataGridTextColumn Header="Beilage" Binding="{Binding Path=mealCombination.mealCombination.secondMealName}" IsReadOnly="True" Width="3*"/>
+                        <DataGridTextColumn Header="Einzelpreis" Binding="{Binding Path=mealCombination.mealCombination.totalPrice, StringFormat=C2}" IsReadOnly="True" Width="2*"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
             <TabItem Header="Einzelessen">
-                <DataGrid x:Name="dgSingleMeals" HorizontalAlignment="Stretch" Margin="0,0,0,2" VerticalAlignment="Stretch">
+                <DataGrid x:Name="dgMainMeals" HorizontalAlignment="Stretch" Margin="0,0,0,2" VerticalAlignment="Stretch">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Zeitstempel" Binding="{Binding Path=timeStamp}" IsReadOnly="True" Width="3*"/>
-                        <DataGridTextColumn Header="Hauptessen" Binding="{Binding Path=mainMealName}" IsReadOnly="True" Width="3*"/>
-                        <DataGridTextColumn Header="Beilage" Binding="{Binding Path=secondMealName}" IsReadOnly="True" Width="3*"/>
-                        <DataGridTextColumn Header="Einzelpreis" Binding="{Binding Path=totalPrice, StringFormat=C2}" IsReadOnly="True" Width="2*"/>
+                        <DataGridTextColumn Header="Anzahl" Binding="{Binding Path=counter}" IsReadOnly="True" Width="1*"/>
+                        <DataGridTextColumn Header="Essen" Binding="{Binding Path=mealCombination.mealCombination.mainMealName}" IsReadOnly="True" Width="3*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Beilagen">
+                <DataGrid x:Name="dgSecondMeals" HorizontalAlignment="Stretch" Margin="0,0,0,2" VerticalAlignment="Stretch">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Anzahl" Binding="{Binding Path=counter}" IsReadOnly="True" Width="1*"/>
+                        <DataGridTextColumn Header="Essen" Binding="{Binding Path=mealCombination.mealCombination.secondMealName}" IsReadOnly="True" Width="3*"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>

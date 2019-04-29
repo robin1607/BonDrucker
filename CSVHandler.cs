@@ -172,7 +172,6 @@ namespace BonDrucker
                 using (var writer = new StreamWriter(_filePath + _fileName))
                 using (var csv = new CsvWriter(writer))
                 {
-                    meal.ForEach(i => Console.Write("{0}\t", i.insertable));
                     csv.WriteRecords(meal);
                 }
             }
@@ -315,6 +314,9 @@ namespace BonDrucker
                     {
                         var record = new Statistic();
                         record.timeStamp = csv.GetField<DateTime>("timeStamp");
+                        record.mealCombination.guid = csv.GetField<Guid>("guid");
+                        record.mealCombination.mainMealGUID = csv.GetField<Guid>("mainMealGUID");
+                        record.mealCombination.secondMealGUID = csv.GetField<Guid>("secondMealGUID");
                         record.mealCombination.mainMealName = csv.GetField<string>("mainMealName");
                         record.mealCombination.secondMealName = csv.GetField<string>("secondMealName");
                         record.mealCombination.totalPrice = csv.GetField<decimal>("totalPrice");

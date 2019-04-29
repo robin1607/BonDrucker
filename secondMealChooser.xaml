@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BonDrucker"
         mc:Ignorable="d"
-        Title="secondMealChooser" Height="447.014" Width="760.741">
+        Title="secondMealChooser" Height="447.014" Width="760.741"
+        WindowStartupLocation="CenterOwner">
     <Grid Name="grid">
         <Grid.ColumnDefinitions>
         </Grid.ColumnDefinitions>

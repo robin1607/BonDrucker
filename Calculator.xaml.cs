@@ -20,6 +20,9 @@ namespace BonDrucker
     public partial class Calculator : Window
     {
         decimal _price;
+        decimal _givenMoney;
+        decimal _lastValue;
+
         public Calculator(decimal price)
         {
             InitializeComponent();
@@ -30,10 +33,9 @@ namespace BonDrucker
         {
             try
             {
-                decimal givenMoney = Convert.ToDecimal(txtMoneyIn.Text);
-                if (txtMoneyIn.Text != null && givenMoney > 0)
+                if (txtMoneyIn.Text != null && _givenMoney > 0)
                 {
-                    decimal returnMoney = calc(_price, givenMoney);
+                    decimal returnMoney = calc(_price, _givenMoney);
                     txtMoneyOut.Text = returnMoney + " €";
                 }
                 else
@@ -50,6 +52,59 @@ namespace BonDrucker
         private decimal calc(decimal price, decimal givenMoney)
         {
             return givenMoney - price;
+        }
+
+        private void button_currency_click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Button btn = sender as Button;
+                string value = btn.Content.ToString().TrimEnd(' ', '€');
+                decimal valueAsDecimal = Convert.ToDecimal(value);
+                _givenMoney += valueAsDecimal;
+                _lastValue = valueAsDecimal;
+                updateTxtMoneyIn();
+            }
+            catch (Exception ex)
+            {
+
+                ExceptionHandler.Log(ex);
+            }
+
+        }
+
+        private void updateTxtMoneyIn()
+        {
+            try
+            {
+                txtMoneyIn.Text = (_givenMoney + " €");
+            }
+            catch (Exception)
+            {
+
+                txtMoneyIn.Text = "0,00 €";
+            }
+        }
+
+        private void btn_09_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                _givenMoney -= _lastValue;
+                _lastValue = 0;
+                updateTxtMoneyIn();
+            }
+            catch (Exception)
+            {
+
+            }
+
+        }
+
+        private void btn_10_Click(object sender, RoutedEventArgs e)
+        {
+            _givenMoney = 0;
+            updateTxtMoneyIn();
         }
     }
 }

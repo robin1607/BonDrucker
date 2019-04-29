@@ -13,6 +13,11 @@ namespace BonDrucker.Models
             guid = Guid.NewGuid();
         }
 
+        public MealCombination(bool noGuid)
+        {
+
+        }
+
         public Guid guid { get; set; }
         public Guid mainMealGUID { get; set; }
         public Guid secondMealGUID { get; set; }

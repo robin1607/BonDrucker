@@ -5,17 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BonDrucker"
         mc:Ignorable="d"
-        Title="Calculator" Height="200.757" Width="378.03"
+        Title="Rechner" Height="394.239" Width="687.131"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="20"
-        TextOptions.TextFormattingMode="Ideal" 
         TextOptions.TextRenderingMode="Auto"        
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Language="de-GER">
+        Language="de-GER"
+        WindowStartupLocation="CenterOwner">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="21*"/>
+            <RowDefinition Height="20*"/>
+        </Grid.RowDefinitions>
         <TextBox x:Name="txtMoneyIn"
                         Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                         VerticalAlignment="Top"
@@ -24,10 +28,37 @@
                         materialDesign:HintAssist.Hint="Bekommen" TextChanged="txtMoneyIn_TextChanged"/>
         <TextBox x:Name="txtMoneyOut"
                         Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
-                        VerticalAlignment="Top"
+                        VerticalAlignment="Bottom"
                          IsReadOnly="True"
                         Height="70"
                         HorizontalAlignment="Stretch"
-                        materialDesign:HintAssist.Hint="Rausgeben" Margin="0,90,0,0"/>
+                        materialDesign:HintAssist.Hint="Rausgeben" Grid.Row="1"/>
+        <Grid HorizontalAlignment="Stretch" Margin="0,80,0,80" VerticalAlignment="Stretch" Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70*"/>
+                <RowDefinition Height="70*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80*"/>
+                <ColumnDefinition Width="80*"/>
+                <ColumnDefinition Width="80*"/>
+                <ColumnDefinition Width="80*"/>
+                <ColumnDefinition Width="80*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btn_01" Content="0,10 €" HorizontalAlignment="Stretch" Margin="5,5,5,5" Height="Auto" VerticalAlignment="Stretch" Grid.Column="0" Click="button_currency_click"/>
+            <Button x:Name="btn_02" Content="0,20 €" HorizontalAlignment="Stretch" Margin="5,5,5,5" Height="Auto" VerticalAlignment="Stretch" Grid.Column="1" Click="button_currency_click"/>
+            <Button x:Name="btn_03" Content="0,50 €" HorizontalAlignment="Stretch" Margin="5,5,5,5" Height="Auto" VerticalAlignment="Stretch" Grid.Column="2" Click="button_currency_click"/>
+            <Button x:Name="btn_04" Content="1 €" HorizontalAlignment="Stretch" Margin="5,5,5,5" Height="Auto" VerticalAlignment="Stretch" Grid.Column="3" Click="button_currency_click"/>
+            <Button x:Name="btn_05" Content="5 €" HorizontalAlignment="Stretch" Margin="5,5,5,5" Height="Auto" VerticalAlignment="Stretch" Grid.Row="1" Click="button_currency_click"/>
+            <Button x:Name="btn_06" Content="10 €" HorizontalAlignment="Stretch" Margin="5,5,5,5" Height="Auto" VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="1" Click="button_currency_click"/>
+            <Button x:Name="btn_07" Content="20 €" HorizontalAlignment="Stretch" Margin="5,5,5,5" Height="Auto" VerticalAlignment="Stretch"  Grid.Column="2" Grid.Row="1" Click="button_currency_click"/>
+            <Button x:Name="btn_08" Content="50 €" HorizontalAlignment="Stretch" Margin="5,5,5,5" Height="Auto" VerticalAlignment="Stretch" Grid.Column="3" Grid.Row="1" Click="button_currency_click"/>
+            <Button x:Name="btn_09" HorizontalAlignment="Stretch" Margin="5" VerticalAlignment="Stretch" Grid.Column="4" Height="Auto" Click="btn_09_Click">
+                <TextBlock TextWrapping="Wrap">Letzte Eingabe löschen</TextBlock>
+            </Button>
+            <Button x:Name="btn_10" HorizontalAlignment="Stretch" Margin="5" VerticalAlignment="Stretch" Grid.Column="4" Height="Auto" Grid.Row="1" Click="btn_10_Click">
+                <TextBlock TextWrapping="Wrap">Neu berechnen</TextBlock>
+            </Button>
+        </Grid>
     </Grid>
 </Window>

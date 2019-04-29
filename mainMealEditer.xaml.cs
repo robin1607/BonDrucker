@@ -30,7 +30,6 @@ namespace BonDrucker
             secondMeals = getSecondMealsFromCSV();
             addMainMealsToDataGrid(mainMeals);
             addSecondMealsToDataGrid(secondMeals);
-            isOnInitProcess = false;
         }
 
         private void btnSafeNewMainMeal_Click(object sender, RoutedEventArgs e)
@@ -45,6 +44,7 @@ namespace BonDrucker
             } 
         }
 
+        // TODO: Die bestehenden MealCombos werden so immer überschrieben -> Preise weg -.-
         private void generateMealCombos(MainMeal mainMeal)
         {
             List<IMeal> secondMeals = getSecondMealsFromCSV();

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BonDrucker"
         mc:Ignorable="d"
-        Title="Bondrucker Feuerwehr Thalexweiler" Height="731.843" Width="1088.458"
+        Title="Bondrucker Feuerwehr Thalexweiler" Height="799.343" Width="1172.458"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -31,7 +31,7 @@
                 <MenuItem Header="Statistik" Click="showStatistic"/>
             </MenuItem>
         </Menu>
-        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" AutoGenerateColumns="False" CanUserAddRows="false" Grid.Row="1" VerticalAlignment="Bottom"  RenderTransformOrigin="0.5,0.5" Margin="10,0,0,10" Height="194" Width="716">
+        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" AutoGenerateColumns="False" CanUserAddRows="false" Grid.Row="1" VerticalAlignment="Bottom"  RenderTransformOrigin="0.5,0.5" Margin="10,0,0,10" Height="215" Width="840">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Essen" Binding="{Binding Path=mainMealName}" Width="4*"/>
                 <DataGridTextColumn Header="Beilage" Binding="{Binding Path=secondMealName}" Width="4*"/>

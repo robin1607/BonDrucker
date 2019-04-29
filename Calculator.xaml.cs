@@ -65,10 +65,9 @@ namespace BonDrucker
                 _lastValue = valueAsDecimal;
                 updateTxtMoneyIn();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                ExceptionHandler.Log(ex);
             }
 
         }

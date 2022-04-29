@@ -5,13 +5,13 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.IO;
 using System.Linq;
+using System.Configuration;
 
 namespace BonDrucker
 {
     static class CSVHandler
     {
-        // TODO: Get this from settings
-        static string _filePath = @"C:\Users\Robin Klos\Documents\Visual Studio 2015\Projects\BonDrucker\";
+        static string _filePath = ConfigurationManager.AppSettings["dataFileLocation"];
         static string _fileName = "";
 
         public static void addToCSV(IMeal meal)
@@ -169,7 +169,7 @@ namespace BonDrucker
             try
             {
                 writeFileNameToProperty(meal.First().GetType().ToString());
-                using (var writer = new StreamWriter(_filePath + _fileName))
+                using (var writer = new StreamWriter(Path.Combine(_filePath, _fileName)))
                 using (var csv = new CsvWriter(writer))
                 {
                     csv.WriteRecords(meal);
@@ -186,7 +186,7 @@ namespace BonDrucker
             try
             {
                 writeFileNameToProperty(type);
-                using (var writer = new StreamWriter(_filePath + _fileName))
+                using (var writer = new StreamWriter(Path.Combine(_filePath, _fileName)))
                 using (var csv = new CsvWriter(writer))
                 {
                     csv.WriteRecords((List<IMeal>)Activator.CreateInstance(Type.GetType(type)));
@@ -203,7 +203,7 @@ namespace BonDrucker
             try
             {
                 writeFileNameToProperty(mealCombo.First().GetType().ToString());
-                using (var writer = new StreamWriter(_filePath + _fileName))
+                using (var writer = new StreamWriter(Path.Combine(_filePath, _fileName)))
                 using (var csv = new CsvWriter(writer))
                 {
                     csv.WriteRecords(mealCombo);
@@ -220,7 +220,7 @@ namespace BonDrucker
             try
             {
                 writeFileNameToProperty(statistic.First().GetType().ToString());
-                using (var writer = new StreamWriter(_filePath + _fileName))
+                using (var writer = new StreamWriter(Path.Combine(_filePath, _fileName)))
                 using (var csv = new CsvWriter(writer))
                 {
                     csv.WriteRecords(statistic);
@@ -238,7 +238,7 @@ namespace BonDrucker
             try
             {
                 writeFileNameToProperty(type);
-                using (var reader = new StreamReader(_filePath + _fileName))
+                using (var reader = new StreamReader(Path.Combine(_filePath, _fileName)))
                 using (var csv = new CsvReader(reader))
                 {
                     var records = new List<IMeal>();
@@ -272,7 +272,7 @@ namespace BonDrucker
             try
             {
                 writeFileNameToProperty(type);
-                using (var reader = new StreamReader(_filePath + _fileName))
+                using (var reader = new StreamReader(Path.Combine(_filePath, _fileName)))
                 using (var csv = new CsvReader(reader))
                 {
                     var records = new List<MealCombination>();
@@ -304,7 +304,7 @@ namespace BonDrucker
             try
             {
                 writeFileNameToProperty("BonDrucker.Statistic");
-                using (var reader = new StreamReader(_filePath + _fileName))
+                using (var reader = new StreamReader(Path.Combine(_filePath, _fileName)))
                 using (var csv = new CsvReader(reader))
                 {
                     var records = new List<Statistic>();

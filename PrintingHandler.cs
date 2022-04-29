@@ -18,7 +18,6 @@ namespace BonDrucker
         static private MealCombination _combo;
         static public void Print(List<MealCombination> mealCombos)
         {
-            return;
             foreach (var combo in mealCombos)
             {
                 var doc = new PrintDocument();

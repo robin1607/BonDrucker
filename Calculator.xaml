@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BonDrucker"
         mc:Ignorable="d"
-        Title="Rechner" Height="531.239" Width="861.131"
+        Title="Rechner" Height="618.866" Width="862.226"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -17,8 +17,8 @@
         WindowStartupLocation="CenterOwner">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="21*"/>
-            <RowDefinition Height="20*"/>
+            <RowDefinition Height="73*"/>
+            <RowDefinition Height="515*"/>
         </Grid.RowDefinitions>
         <TextBox x:Name="txtMoneyIn"
                         Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
@@ -32,8 +32,8 @@
                          IsReadOnly="True"
                         Height="70"
                         HorizontalAlignment="Stretch"
-                        materialDesign:HintAssist.Hint="Rausgeben" Grid.Row="1"/>
-        <Grid HorizontalAlignment="Stretch" Margin="0,80,0,80" VerticalAlignment="Stretch" Grid.RowSpan="2">
+                        materialDesign:HintAssist.Hint="Rausgeben" Grid.Row="1" Margin="0,0,0,110"/>
+        <Grid HorizontalAlignment="Stretch" Margin="0,0,0,182" VerticalAlignment="Stretch" Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="70*"/>
                 <RowDefinition Height="70*"/>
@@ -59,6 +59,7 @@
             <Button x:Name="btn_10" HorizontalAlignment="Stretch" Margin="5" VerticalAlignment="Stretch" Grid.Column="4" Height="Auto" Grid.Row="1" Click="btn_10_Click">
                 <TextBlock TextWrapping="Wrap">Neu berechnen</TextBlock>
             </Button>
+            <Button x:Name="btn_close" Content="Fertig" HorizontalAlignment="Stretch" Margin="5,261,5,-177" Height="Auto" VerticalAlignment="Stretch" Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="1" Click="btn_close_Click"/>
         </Grid>
     </Grid>
 </Window>

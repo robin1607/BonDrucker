@@ -18,12 +18,19 @@ namespace BonDrucker
         static private MealCombination _combo;
         static public void Print(List<MealCombination> mealCombos)
         {
-            foreach (var combo in mealCombos)
+            try
             {
-                var doc = new PrintDocument();
-                _combo = combo;
-                doc.PrintPage += new PrintPageEventHandler(ProvideContent);
-                doc.Print();
+                foreach (var combo in mealCombos)
+                {
+                    var doc = new PrintDocument();
+                    _combo = combo;
+                    doc.PrintPage += new PrintPageEventHandler(ProvideContent);
+                    doc.Print();
+                }
+            }
+            catch(Exception ex)
+            {
+                ExceptionHandler.Log(ex);
             }
         }
 

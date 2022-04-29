@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace BonDrucker
 {
     class ExceptionHandler
     {
-        static string filePath = @"C:\Users\Robin Klos\Documents\Visual Studio 2015\Projects\BonDrucker\Error.txt";
+        static string filePath = Path.Combine(ConfigurationManager.AppSettings["dataFileLocation"], "Error.txt");
 
         public static void Log(Exception ex)
         {
